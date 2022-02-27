@@ -83,6 +83,20 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 " 'Q' in normal mode enters Ex mode. You almost never want this.
 nnoremap Q <Nop> 
 
+"========== Plugins ==========" 
+" Automatic installation of vim-plug if it's not yet installed
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+" NOTE: This won't work if the curl package is not installed
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+" NOTE: This line below is not given in the link above but it's required
+" or an error will appear on execution (PlugInstall is dependent on it)
+call plug#begin('~/.vim/autoload')
+call plug#end()
+
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
 " shown in any window) that has unsaved changes. This is to prevent you from "
