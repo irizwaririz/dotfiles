@@ -1,0 +1,7 @@
+[user]
+	email = 10111643+Irizwaririz@users.noreply.github.com
+	name = John Carlo Roberto
+[diff]
+    tool = vimdiff
+[difftool]
+	prompt = false
