@@ -29,6 +29,9 @@ set relativenumber
 set laststatus=2
 " Disable audible/visual bell because it's annoying.
 set noerrorbells visualbell t_vb=
+" Adds a vertical line on the 80th column for visual reference.
+set colorcolumn=80
+highlight ColorColumn ctermbg=238
 
 "==========  Tabs and Indentation =========="
 " Number of visual spaces per TAB
@@ -82,6 +85,9 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 "========== Modes =========="
 " 'Q' in normal mode enters Ex mode. You almost never want this.
 nnoremap Q <Nop> 
+" This will make exiting insert mode to normal mode more efficiently.
+inoremap jk <ESC>
+inoremap kj <ESC>
 
 "========== Plugins ==========" 
 " Automatic installation of vim-plug if it's not yet installed
