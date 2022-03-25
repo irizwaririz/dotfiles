@@ -7,7 +7,27 @@
 " `vim -u foo`).
 set nocompatible
 
+"========== Plugins ==========" 
+" Automatic installation of vim-plug if it's not yet installed
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+" NOTE: This won't work if the curl package is not installed
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+" NOTE: This line below is not given in the link above but it's required
+" or an error will appear on execution (PlugInstall is dependent on it)
+call plug#begin('~/.vim/plugged')
+
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
 "========== User Interface =========="
+" Use the gruvbox plugin as our colorscheme (in dark mode)
+colorscheme gruvbox
+set background=dark
 " Show (partial) commands in status line
 set showcmd
 " Turn on syntax highlighting.
@@ -99,20 +119,6 @@ let mapleader = " "
 " Move text up and down easily (these also apply the correct indentation)
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
-
-"========== Plugins ==========" 
-" Automatic installation of vim-plug if it's not yet installed
-" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-" NOTE: This won't work if the curl package is not installed
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-" NOTE: This line below is not given in the link above but it's required
-" or an error will appear on execution (PlugInstall is dependent on it)
-call plug#begin('~/.vim/plugged')
-call plug#end()
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
