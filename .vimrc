@@ -89,6 +89,17 @@ nnoremap Q <Nop>
 inoremap jk <ESC>
 inoremap kj <ESC>
 
+"========== General Remaps =========="
+" This will make Y behave like D/C
+nnoremap Y y$
+
+"========== Leader Shortcuts =========="
+" Set leader key to spacebar
+let mapleader = " "
+" Move text up and down easily (these also apply the correct indentation)
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+
 "========== Plugins ==========" 
 " Automatic installation of vim-plug if it's not yet installed
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -100,7 +111,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 " NOTE: This line below is not given in the link above but it's required
 " or an error will appear on execution (PlugInstall is dependent on it)
-call plug#begin('~/.vim/autoload')
+call plug#begin('~/.vim/plugged')
 call plug#end()
 
 "========== Pending =========="
