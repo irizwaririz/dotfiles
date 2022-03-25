@@ -116,9 +116,22 @@ nnoremap Y y$
 "========== Leader Shortcuts =========="
 " Set leader key to spacebar
 let mapleader = " "
-" Move text up and down easily (these also apply the correct indentation)
+" Move text up and down easily (then apply the correct indentation)
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
+" Switch between window splits easily
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+" Instantiate netrw explorer window easily with a proper window size
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+" Resize windows easily
+nnoremap <leader>+ :vertical resize +5<CR>
+nnoremap <leader>- :vertical resize -5<CR>
+
+"========== netrw Settings =========="
+" let g:netrw_winsize=25
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
