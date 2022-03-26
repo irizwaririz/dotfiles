@@ -109,6 +109,10 @@ nnoremap <C-h> :wincmd h<CR>
 nnoremap <C-j> :wincmd j<CR>
 nnoremap <C-k> :wincmd k<CR>
 nnoremap <C-l> :wincmd l<CR>
+" Move visually selected text up and down easily (then apply the correct
+" indentation)
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 "========== Modes =========="
 " 'Q' in normal mode enters Ex mode. You almost never want this.
@@ -134,6 +138,20 @@ nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>
 
 "========== netrw Settings =========="
+" Remove the netrw mapping of <C-l> to refresh. This is so that our map of
+" <C-l> to move to the right window split will still work on netrw
+augroup netrw_mapping
+    autocmd!
+    autocmd filetype netrw call NetrwMapping()
+augroup END
+
+function! NetrwMapping()
+    nnoremap <buffer> <c-l> :wincmd l<cr>
+endfunction
+" Remove the netrw banner at the top
+let g:netrw_banner = 0
+" Make netrw list the directories as trees
+let g:netrw_liststyle = 3
 " let g:netrw_winsize=25
 
 "========== Pending =========="
