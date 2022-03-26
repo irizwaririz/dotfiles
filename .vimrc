@@ -55,6 +55,8 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=238
 " Leaves 8 lines of code as an allowance while scrolling up/down
 set scrolloff=8
+" Prevent line wrapping 
+set nowrap
 
 "==========  Tabs and Indentation =========="
 " Number of visual spaces per TAB
