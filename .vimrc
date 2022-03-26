@@ -52,6 +52,8 @@ set noerrorbells visualbell t_vb=
 " Adds a vertical line on the 80th column for visual reference.
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
+" Leaves 8 lines of code as an allowance while scrolling up/down
+set scrolloff=8
 
 "==========  Tabs and Indentation =========="
 " Number of visual spaces per TAB
@@ -101,6 +103,11 @@ inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
+" Switch between window splits easily
+nnoremap <C-h> :wincmd h<CR>
+nnoremap <C-j> :wincmd j<CR>
+nnoremap <C-k> :wincmd k<CR>
+nnoremap <C-l> :wincmd l<CR>
 
 "========== Modes =========="
 " 'Q' in normal mode enters Ex mode. You almost never want this.
@@ -119,13 +126,8 @@ let mapleader = " "
 " Move text up and down easily (then apply the correct indentation)
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
-" Switch between window splits easily
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
 " Instantiate netrw explorer window easily with a proper window size
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>pv :Vex <bar> :vertical resize 30<CR>
 " Resize windows easily
 nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>
