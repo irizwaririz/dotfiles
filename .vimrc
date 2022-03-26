@@ -144,7 +144,6 @@ augroup netrw_mapping
     autocmd!
     autocmd filetype netrw call NetrwMapping()
 augroup END
-
 function! NetrwMapping()
     nnoremap <buffer> <c-l> :wincmd l<cr>
 endfunction
