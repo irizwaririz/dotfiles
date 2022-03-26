@@ -133,8 +133,8 @@ let mapleader = " "
 " Move text up and down easily (then apply the correct indentation)
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
-" Instantiate netrw explorer window easily with a proper window size
-nnoremap <leader>pv :Vex <bar> :vertical resize 30<CR>
+" Instantiate netrw explorer window easily
+nnoremap <leader>pv :Vex<CR>
 " Resize windows easily
 nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>
@@ -150,10 +150,11 @@ function! NetrwMapping()
     nnoremap <buffer> <c-l> :wincmd l<cr>
 endfunction
 " Remove the netrw banner at the top
-let g:netrw_banner = 0
+let g:netrw_banner=0
 " Make netrw list the directories as trees
-let g:netrw_liststyle = 3
-" let g:netrw_winsize=25
+let g:netrw_liststyle=3
+" Instantiate netrw window with proper window size
+let g:netrw_winsize=15
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
