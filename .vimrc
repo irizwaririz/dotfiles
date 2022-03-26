@@ -20,7 +20,7 @@ endif
 " or an error will appear on execution (PlugInstall is dependent on it)
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 
 call plug#end()
 
