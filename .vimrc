@@ -22,6 +22,9 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'  
 
 call plug#end()
 
@@ -84,6 +87,17 @@ set smartcase
 " Enable searching as you type, rather than waiting till you press enter.
 set incsearch
 
+"========== General Mapping =========="
+" This will make Y behave like D/C
+nnoremap Y y$
+
+"========== General Leader Mappings =========="
+" Set leader key to spacebar
+let mapleader = " "
+" Resize windows easily
+nnoremap <leader>+ :vertical resize +5<CR>
+nnoremap <leader>- :vertical resize -5<CR>
+
 "========== Movement =========="
 " The backspace key has slightly unintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
@@ -113,8 +127,11 @@ nnoremap <C-h> :wincmd h<CR>
 nnoremap <C-j> :wincmd j<CR>
 nnoremap <C-k> :wincmd k<CR>
 nnoremap <C-l> :wincmd l<CR>
-" Move visually selected text up and down easily (then apply the correct
-" indentation)
+" Move text up and down easily then apply the correct indentation
+" Do this in normal mode...
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+" ...and in visual mode
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -125,23 +142,9 @@ nnoremap Q <Nop>
 inoremap jk <ESC>
 inoremap kj <ESC>
 
-"========== General Remaps =========="
-" This will make Y behave like D/C
-nnoremap Y y$
-
-"========== Leader Shortcuts =========="
-" Set leader key to spacebar
-let mapleader = " "
-" Move text up and down easily (then apply the correct indentation)
-nnoremap <leader>j :m .+1<CR>==
-nnoremap <leader>k :m .-2<CR>==
+"========== netrw =========="
 " Instantiate netrw explorer window easily
 nnoremap <leader>pv :Vex<CR>
-" Resize windows easily
-nnoremap <leader>+ :vertical resize +5<CR>
-nnoremap <leader>- :vertical resize -5<CR>
-
-"========== netrw Settings =========="
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
 " <C-l> to move to the right window split will still work on netrw
 augroup netrw_mapping
@@ -157,6 +160,14 @@ let g:netrw_banner=0
 let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size
 let g:netrw_winsize=15
+
+"========== fzf =========="
+" Open fzf as a pop-up window in the center
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+" Open fzf easily
+nnoremap <C-p> :Files<CR>
+" Re-map horizontal window split file opening to <C-s> for consistency
+let g:fzf_action = { 'ctrl-s': 'split' }
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
