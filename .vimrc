@@ -149,7 +149,7 @@ augroup netrw_mapping
     autocmd filetype netrw call NetrwMapping()
 augroup END
 function! NetrwMapping()
-    nnoremap <buffer> <c-l> :wincmd l<cr>
+    nnoremap <buffer> <C-l> :wincmd l<cr>
 endfunction
 " Remove the netrw banner at the top
 let g:netrw_banner=0
