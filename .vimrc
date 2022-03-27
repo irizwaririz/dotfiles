@@ -57,6 +57,8 @@ highlight ColorColumn ctermbg=238
 set scrolloff=8
 " Prevent line wrapping 
 set nowrap
+" Put vertical window splits to the right
+set splitright
 
 "==========  Tabs and Indentation =========="
 " Number of visual spaces per TAB
