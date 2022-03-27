@@ -159,7 +159,7 @@ let g:netrw_banner=0
 " Make netrw list the directories as trees
 let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size
-let g:netrw_winsize=15
+let g:netrw_winsize=25
 
 "========== fzf =========="
 " Open fzf as a pop-up window in the center
