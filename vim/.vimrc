@@ -56,6 +56,8 @@ set noerrorbells visualbell t_vb=
 " Adds a vertical line on the 80th column for visual reference.
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
+" Use terminal background
+highlight Normal ctermbg=NONE
 " Leaves 8 lines of code as an allowance while scrolling up/down
 set scrolloff=8
 " Prevent line wrapping 
