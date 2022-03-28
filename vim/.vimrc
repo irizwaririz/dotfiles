@@ -64,6 +64,8 @@ set scrolloff=8
 set nowrap
 " Put vertical window splits to the right
 set splitright
+" Show row and column number of cursor position
+set ruler
 
 "==========  Tabs and Indentation =========="
 " Number of visual spaces per TAB
@@ -166,8 +168,10 @@ let g:netrw_winsize=25
 "========== fzf =========="
 " Open fzf as a pop-up window in the center
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
-" Open fzf easily
+" Open fzf file searching window easily
 nnoremap <C-p> :Files<CR>
+" Open fzf ripgrep searching window easily
+nnoremap <C-g> :Rg<Cr>
 " Re-map horizontal window split file opening to <C-s> for consistency
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
