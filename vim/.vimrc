@@ -169,7 +169,10 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 " Open fzf easily
 nnoremap <C-p> :Files<CR>
 " Re-map horizontal window split file opening to <C-s> for consistency
-let g:fzf_action = { 'ctrl-s': 'split' }
+let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-s': 'split',
+    \ 'ctrl-v': 'vsplit' }
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
