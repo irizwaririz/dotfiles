@@ -25,6 +25,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'  
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 call plug#end()
 
@@ -177,6 +178,16 @@ let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit' }
+
+"========== coc.nvim =========="
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+" GoTo code navigation
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
