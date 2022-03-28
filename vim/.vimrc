@@ -195,6 +195,10 @@ let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit' }
+" Better fuzzy searching using ripgrep (but only if ripgrep is installed)
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+endif
 
 "========== coc.nvim =========="
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
