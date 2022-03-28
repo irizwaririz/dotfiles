@@ -9,6 +9,10 @@ set nocompatible
 " Automatically refresh currently opened file/s when the file/s have been 
 " changed outside of vim
 set autoread
+" Copy/Paste/Cut using system clipboard
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
 
 "========== Plugins ==========" 
 " Automatic installation of vim-plug if it's not yet installed
