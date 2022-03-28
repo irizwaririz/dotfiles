@@ -6,13 +6,26 @@
 " loaded some other way (e.g. saved as `foo`, and then Vim started with
 " `vim -u foo`).
 set nocompatible
+" Automatically refresh currently opened file/s when the file/s have been 
+" changed outside of vim
+set autoread
 
 "========== Plugins ==========" 
 " Automatic installation of vim-plug if it's not yet installed
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-" NOTE: This won't work if the curl package is not installed
+" NOTE: The installation won't work if the curl package is not installed
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
