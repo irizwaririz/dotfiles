@@ -43,12 +43,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
 
-" vim should have popupwin feature for these to work properly
+" vim must have the popupwin feature for these to work properly
 if has('nvim-0.4.0') || has('patch-8.2.191')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'stsewd/fzf-checkout.vim'  
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  " vim must have the :terminal command for this to work properly
+  if exists(':terminal')
+	Plug 'chengzeyi/multiterm.vim'
+  endif
 endif
 
 " The master branch is async-only and thus requires at least Vim 8.0.902.
@@ -218,14 +222,6 @@ endif
 "========== coc.nvim =========="
 " Automatically install coc extensions if missing
 let g:coc_global_extensions = ['coc-pyright']
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -274,6 +270,13 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
+"========== multiterm =========="
+" Put the following lines in your configuration file to map <F12> to use Multiterm
+nmap <F12> <Plug>(Multiterm)
+" In terminal mode `count` is impossible to press, but you can still use <F12>
+" to close the current floating terminal window without specifying its tag
+tmap <F12> <Plug>(Multiterm)
+
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
 " shown in any window) that has unsaved changes. This is to prevent you from "
@@ -281,6 +284,17 @@ nmap <leader>rn <Plug>(coc-rename)
 " hidden buffers helpful enough to disable this protection. See `:help hidden`
 " for more information on this.
 " set hidden
+"
+" This currently makes it hard to navigate with vim-signify. So this is
+" disabled for now.
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+" if has("nvim-0.5.0") || has("patch-8.1.1564")
+"   " Recently vim can merge signcolumn and number column into one
+"   set signcolumn=number
+" else
+"   set signcolumn=yes
+" endif
 "
 " For coc.nvim:
 " Make <CR> confirm completion, only when there's selected complete item
