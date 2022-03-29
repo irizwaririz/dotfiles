@@ -13,6 +13,9 @@ set autoread
 if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endif
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=100
 
 "========== Plugins ==========" 
 " Automatic installation of vim-plug if it's not yet installed
@@ -46,6 +49,14 @@ if has('nvim-0.4.0') || has('patch-8.2.191')
   Plug 'junegunn/fzf.vim'
   Plug 'stsewd/fzf-checkout.vim'  
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+endif
+
+" The master branch is async-only and thus requires at least Vim 8.0.902.
+" Use the legacy branch for older Vim versions.
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
 call plug#end()
@@ -207,9 +218,6 @@ endif
 "========== coc.nvim =========="
 " Automatically install coc extensions if missing
 let g:coc_global_extensions = ['coc-pyright']
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=100
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("nvim-0.5.0") || has("patch-8.1.1564")
