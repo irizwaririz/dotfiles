@@ -39,10 +39,14 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'  
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
+" vim should have popupwin feature for these to work properly
+if has('nvim-0.4.0') || has('patch-8.2.191')
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'stsewd/fzf-checkout.vim'  
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+endif
 
 call plug#end()
 
@@ -166,7 +170,7 @@ inoremap kj <ESC>
 
 "========== netrw =========="
 " Instantiate netrw explorer window easily
-nnoremap <leader>pv :Vex<CR>
+nnoremap <leader>pv :Lex<CR>
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
 " <C-l> to move to the right window split will still work on netrw
 augroup netrw_mapping
@@ -174,7 +178,7 @@ augroup netrw_mapping
     autocmd filetype netrw call NetrwMapping()
 augroup END
 function! NetrwMapping()
-    nnoremap <buffer> <C-l> :wincmd l<cr>
+    nnoremap <buffer> <C-l> :wincmd l<CR>
 endfunction
 " Remove the netrw banner at the top
 let g:netrw_banner=0
@@ -189,7 +193,7 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 " Open fzf file searching window easily
 nnoremap <C-p> :Files<CR>
 " Open fzf ripgrep searching window easily
-nnoremap <C-g> :Rg<Cr>
+nnoremap <C-g> :Rg<CR>
 " Re-map horizontal window split file opening to <C-s> for consistency
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
@@ -201,14 +205,66 @@ if executable('rg')
 endif
 
 "========== coc.nvim =========="
+" Automatically install coc extensions if missing
+let g:coc_global_extensions = ['coc-pyright']
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <C-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <C-space> coc#refresh()
+else
+  inoremap <silent><expr> <C-@> coc#refresh()
+endif
+" Make <CR> select the first completion item and confirm the completion when
+" no item has been selected
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation
 nnoremap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> gy <Plug>(coc-type-definition)
 nnoremap <silent> gi <Plug>(coc-implementation)
 nnoremap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
@@ -217,3 +273,10 @@ nnoremap <silent> gr <Plug>(coc-references)
 " hidden buffers helpful enough to disable this protection. See `:help hidden`
 " for more information on this.
 " set hidden
+"
+" For coc.nvim:
+" Make <CR> confirm completion, only when there's selected complete item
+" if exists('*complete_info')
+"   inoremap <silent><expr> <CR> complete_info(['selected'])['selected'] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
+" endif
+
