@@ -183,9 +183,9 @@ nnoremap Q <Nop>
 inoremap jk <ESC>
 inoremap kj <ESC>
 
-"========== netrw =========="
+"========== netrw (coc-explorer is currently preferred over this) =========="
 " Instantiate netrw explorer window easily
-nnoremap <leader>pv :Lex<CR>
+" nnoremap <leader>pv :Lex<CR>
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
 " <C-l> to move to the right window split will still work on netrw
 augroup netrw_mapping
@@ -221,7 +221,7 @@ endif
 
 "========== coc.nvim =========="
 " Automatically install coc extensions if missing
-let g:coc_global_extensions = ['coc-pyright']
+let g:coc_global_extensions = ['coc-pyright', 'coc-explorer', 'coc-json' ]
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -269,6 +269,9 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+"========== coc-explorer =========="
+nnoremap <leader>pv :CocCommand explorer<CR>
 
 "========== multiterm =========="
 " Put the following lines in your configuration file to map <F12> to use Multiterm
