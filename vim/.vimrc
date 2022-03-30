@@ -7,9 +7,9 @@
 " `vim -u foo`).
 set nocompatible
 " Automatically refresh currently opened file/s when the file/s have been 
-" changed outside of vim
+" changed outside of vim.
 set autoread
-" Copy/Paste/Cut using system clipboard
+" Copy/Paste/Cut using system clipboard.
 if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endif
@@ -35,9 +35,9 @@ if !isdirectory(&backupdir) | call mkdir(&backupdir, "p", 0700) | endif
 if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 
 "========== Plugins ==========" 
-" Automatic installation of vim-plug if it's not yet installed
+" Automatic installation of vim-plug if it's not yet installed.
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-" NOTE: The installation won't work if the curl package is not installed
+" NOTE: The installation won't work if the curl package is not installed.
 if has('win32')&&!has('win64')
   let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
 else
@@ -54,19 +54,19 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " NOTE: This line below is not given in the link above but it's required
-" or an error will appear on execution (PlugInstall is dependent on it)
+" or an error will appear on execution (i.e. PlugInstall is dependent on it).
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
 
-" vim must have the popupwin feature for these to work properly
+" vim must have the popupwin feature for these to work properly.
 if has('nvim-0.4.0') || has('patch-8.2.191')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'stsewd/fzf-checkout.vim'  
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-  " vim must have the :terminal command for this to work properly
+  " vim must have the :terminal command for this to work properly.
   if exists(':terminal')
 	Plug 'chengzeyi/multiterm.vim'
   endif
@@ -83,14 +83,14 @@ endif
 call plug#end()
 
 "========== User Interface =========="
-" Use the gruvbox plugin as our colorscheme (in dark mode)
+" Use the gruvbox plugin as our colorscheme (in dark mode).
 colorscheme gruvbox
 set background=dark
-" Show (partial) commands in status line
+" Show (partial) commands in status line.
 set showcmd
 " Turn on syntax highlighting.
 syntax on
-" Better command-line completion
+" Better command-line completion.
 set wildmenu
 " Disable the default Vim startup message.
 set shortmess+=I
@@ -110,30 +110,30 @@ set noerrorbells visualbell t_vb=
 " Adds a vertical line on the 80th column for visual reference.
 set colorcolumn=80
 highlight ColorColumn ctermbg=238
-" Use terminal background
+" Use the same background as the terminal emulator.
 highlight Normal ctermbg=NONE
-" Leaves 8 lines of code as an allowance while scrolling up/down
+" Leaves 8 lines of code as an allowance while scrolling up/down.
 set scrolloff=8
-" Prevent line wrapping 
+" Prevent line wrapping.
 set nowrap
-" Put vertical window splits to the right
+" Put vertical window splits to the right.
 set splitright
-" Show row and column number of cursor position
+" Show row and column number of cursor position.
 set ruler
 
 "==========  Tabs and Indentation =========="
-" Number of visual spaces per TAB
+" Number of visual spaces per TAB.
 set tabstop=4
-" Number of spaces in TAB when editing
+" Number of spaces in TAB when editing.
 set softtabstop=4
-" Number of spaces indented when reindent operations (>> and <<) are used
+" Number of spaces indented when reindent operations (>> and <<) are used.
 set shiftwidth=4
-" Convert TABs to spaces
+" Convert TABs to spaces.
 set expandtab
-" Enable intelligent tabbing and spacing for indentation and alignment
+" Enable intelligent tabbing and spacing for indentation and alignment.
 set smarttab
 " When opening a new line and no file-specific indenting is enabled,
-" keep same indent as the line you're currently on
+" keep same indent as the line you're currently on.
 set autoindent
 
 "========== Searching =========="
@@ -146,15 +146,15 @@ set smartcase
 set incsearch
 
 "========== General Mapping =========="
-" This will make Y behave like D/C
+" This will make Y behave like D/C.
 nnoremap Y y$
 
 "========== General Leader Mappings =========="
-" Set leader key to spacebar
+" Set leader key to spacebar.
 let mapleader = " "
-" Resize windows easily
-nnoremap <leader>+ :vertical resize +5<CR>
-nnoremap <leader>- :vertical resize -5<CR>
+" Resize windows easily.
+nnoremap <leader>+ :vertical resize +10<CR>
+nnoremap <leader>- :vertical resize -10<CR>
 
 "========== Movement =========="
 " The backspace key has slightly unintuitive behavior by default. For example,
@@ -180,12 +180,12 @@ inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
-" Switch between window splits easily
+" Switch between window splits easily.
 nnoremap <C-h> :wincmd h<CR>
 nnoremap <C-j> :wincmd j<CR>
 nnoremap <C-k> :wincmd k<CR>
 nnoremap <C-l> :wincmd l<CR>
-" Move text up and down easily then apply the correct indentation
+" Move text up and down easily then apply the correct indentation.
 " Do this in normal mode...
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
@@ -201,10 +201,8 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 
 "========== netrw (coc-explorer is currently preferred over this) =========="
-" Instantiate netrw explorer window easily
-" nnoremap <leader>pv :Lex<CR>
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
-" <C-l> to move to the right window split will still work on netrw
+" <C-l> to move to the right window split will still work on netrw.
 augroup netrw_mapping
     autocmd!
     autocmd filetype netrw call NetrwMapping()
@@ -212,11 +210,11 @@ augroup END
 function! NetrwMapping()
     nnoremap <buffer> <C-l> :wincmd l<CR>
 endfunction
-" Remove the netrw banner at the top
+" Remove the netrw banner at the top.
 let g:netrw_banner=0
-" Make netrw list the directories as trees
+" Make netrw list the directories as trees.
 let g:netrw_liststyle=3
-" Instantiate netrw window with proper window size
+" Instantiate netrw window with proper window size.
 let g:netrw_winsize=25
 
 "========== vim-fugitive =========="
@@ -237,20 +235,20 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-" Open fzf as a pop-up window in the center
+" Open fzf as a pop-up window in the center.
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
-" Open fzf file searching window easily
+" Open fzf file searching window easily.
 nnoremap <C-p> :Files<CR>
-" Open fzf ripgrep searching window easily
+" Open fzf ripgrep searching window easily.
 nnoremap <C-g> :RG<CR>
 " Open git log window easily.
 nnoremap <leader>gl :Commits<CR>
-" Re-map horizontal window split file opening to <C-s> for consistency
+" Re-map horizontal window split file opening to <C-s> for consistency.
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit' }
-" Better fuzzy searching using ripgrep (but only if ripgrep is installed)
+" Better fuzzy searching using ripgrep (but only if ripgrep is installed).
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 endif
@@ -260,7 +258,7 @@ endif
 nnoremap <leader>gc :GBranches<CR>
 
 "========== coc.nvim =========="
-" Automatically install coc extensions if missing
+" Automatically install coc extensions if missing.
 let g:coc_global_extensions = [ 'coc-pyright', 'coc-explorer', 'coc-json' ]
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -282,13 +280,13 @@ else
   inoremap <silent><expr> <C-@> coc#refresh()
 endif
 " Make <CR> select the first completion item and confirm the completion when
-" no item has been selected
+" no item has been selected.
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-" Use `[g` and `]g` to navigate diagnostics
+" Use `[g` and `]g` to navigate diagnostics.
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" GoTo code navigation
+" GoTo code navigation.
 nnoremap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> gy <Plug>(coc-type-definition)
 nnoremap <silent> gi <Plug>(coc-implementation)
@@ -311,13 +309,14 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 "========== coc-explorer =========="
+" Easily instantiate file tree.
 nnoremap <leader>pv :CocCommand explorer<CR>
 
 "========== multiterm =========="
-" Put the following lines in your configuration file to map <F12> to use Multiterm
+" Easily instantiate a floating terminal.
 nmap <F12> <Plug>(Multiterm)
 " In terminal mode `count` is impossible to press, but you can still use <F12>
-" to close the current floating terminal window without specifying its tag
+" to close the current floating terminal window without specifying its tag.
 tmap <F12> <Plug>(Multiterm)
 
 "========== vim-signify  =========="
@@ -331,13 +330,17 @@ function! s:show_current_hunk() abort
   endif
 endfunction
 
-"========== Pending =========="
+"========== Pending/Disabled =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
 " shown in any window) that has unsaved changes. This is to prevent you from "
 " forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
 " hidden buffers helpful enough to disable this protection. See `:help hidden`
 " for more information on this.
 " set hidden
+"
+" For netrw:
+" Instantiate netrw explorer window easily.
+" nnoremap <leader>pv :Lex<CR>
 "
 " This currently makes it hard to navigate with vim-signify. So this is
 " disabled for now.
@@ -351,7 +354,7 @@ endfunction
 " endif
 "
 " For coc.nvim:
-" Make <CR> confirm completion, only when there's selected complete item
+" Make <CR> confirm completion, only when there's selected complete item.
 " if exists('*complete_info')
 "   inoremap <silent><expr> <CR> complete_info(['selected'])['selected'] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
 " endif
