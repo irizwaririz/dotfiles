@@ -16,6 +16,23 @@ endif
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=100
+" Make vim put the swap, backup, and undofiles in a special directory instead
+" of the working directory.
+" NOTE: Using double trailing slashes (e.g. ~/.vim/swap//) tells vim to enable
+" a feature where it avoids name collisions (i.e. same file names but different
+" paths) by using the whole path of the files instead.
+let &directory = expand('~/.vim/swap//')
+
+set backup
+let &backupdir = expand('~/.vim/backup//')
+
+set undofile
+let &undodir = expand('~/.vim/undo//')
+" Create those directories (with full permissions for the owner and no
+" permissions for anyone else) if they don't exist.
+if !isdirectory(&undodir) | call mkdir(&undodir, "p", 0700) | endif
+if !isdirectory(&backupdir) | call mkdir(&backupdir, "p", 0700) | endif
+if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 
 "========== Plugins ==========" 
 " Automatic installation of vim-plug if it's not yet installed
@@ -202,13 +219,32 @@ let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size
 let g:netrw_winsize=25
 
+"========== vim-fugitive =========="
+" Easily open the git status window.
+nnoremap <leader>gs :G<CR>
+" Easily open the git blame window.
+nnoremap <leader>gb :Git blame<CR>
+
 "========== fzf =========="
+" Advanced ripgrep integration (i.e. actually use ripgrep when searching in
+" multiple files). This will be mapped to :RG.
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 " Open fzf as a pop-up window in the center
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 " Open fzf file searching window easily
 nnoremap <C-p> :Files<CR>
 " Open fzf ripgrep searching window easily
-nnoremap <C-g> :Rg<CR>
+nnoremap <C-g> :RG<CR>
+" Open git log window easily.
+nnoremap <leader>gl :Commits<CR>
 " Re-map horizontal window split file opening to <C-s> for consistency
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
@@ -219,9 +255,13 @@ if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 endif
 
+"========== fzf-checkout =========="
+" Open the git branches window easily.
+nnoremap <leader>gc :GBranches<CR>
+
 "========== coc.nvim =========="
 " Automatically install coc extensions if missing
-let g:coc_global_extensions = ['coc-pyright', 'coc-explorer', 'coc-json' ]
+let g:coc_global_extensions = [ 'coc-pyright', 'coc-explorer', 'coc-json' ]
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -279,6 +319,17 @@ nmap <F12> <Plug>(Multiterm)
 " In terminal mode `count` is impossible to press, but you can still use <F12>
 " to close the current floating terminal window without specifying its tag
 tmap <F12> <Plug>(Multiterm)
+
+"========== vim-signify  =========="
+" Show current and total hunks when jumping between hunks.
+autocmd User SignifyHunk call s:show_current_hunk()
+
+function! s:show_current_hunk() abort
+  let h = sy#util#get_hunk_stats()
+  if !empty(h)
+    echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
+  endif
+endfunction
 
 "========== Pending =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
