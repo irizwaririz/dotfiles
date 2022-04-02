@@ -148,6 +148,13 @@ set incsearch
 "========== General Mapping =========="
 " This will make Y behave like D/C.
 nnoremap Y y$
+" This will allow us to apply macros to visually selected lines (per line)
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 "========== General Leader Mappings =========="
 " Set leader key to spacebar.
