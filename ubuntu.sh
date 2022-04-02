@@ -14,13 +14,16 @@ function install {
   fi
 }
 
-# apt packages
+# basic packages
 install curl
 install wget
 install git
 install stow
 install ripgrep
+
+# vim dependencies
 install libncurses5-dev
+install libxt-dev
 
 # Run all installation scripts in programs/
 for f in programs/*.sh; do bash "$f" -H; done
