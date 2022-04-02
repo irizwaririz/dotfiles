@@ -68,7 +68,7 @@ if has('nvim-0.4.0') || has('patch-8.2.191')
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " vim must have the :terminal command for this to work properly.
   if exists(':terminal')
-	Plug 'chengzeyi/multiterm.vim'
+    Plug 'voldikss/vim-floaterm'
   endif
 endif
 
@@ -312,13 +312,6 @@ nmap <leader>rn <Plug>(coc-rename)
 " Easily instantiate file tree.
 nnoremap <leader>pv :CocCommand explorer<CR>
 
-"========== multiterm =========="
-" Easily instantiate a floating terminal.
-nmap <F12> <Plug>(Multiterm)
-" In terminal mode `count` is impossible to press, but you can still use <F12>
-" to close the current floating terminal window without specifying its tag.
-tmap <F12> <Plug>(Multiterm)
-
 "========== vim-signify  =========="
 " Show current and total hunks when jumping between hunks.
 autocmd User SignifyHunk call s:show_current_hunk()
@@ -329,6 +322,22 @@ function! s:show_current_hunk() abort
     echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
   endif
 endfunction
+
+"========== vim-floaterm  =========="
+" Set width and height of floating terminals.
+let g:floaterm_width=0.9
+let g:floaterm_height=0.9
+" Easily instantiate a floating terminal.
+nnoremap   <silent>   <F7>    :FloatermNew<CR>
+tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
+" Easily navigate between floating terminals.
+nnoremap   <silent>   <F8>    :FloatermPrev<CR>
+tnoremap   <silent>   <F8>    <C-\><C-n>:FloatermPrev<CR>
+nnoremap   <silent>   <F9>    :FloatermNext<CR>
+tnoremap   <silent>   <F9>    <C-\><C-n>:FloatermNext<CR>
+" Easily toggle an existing floating terminal.
+nnoremap   <silent>   <F12>   :FloatermToggle<CR>
+tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 
 "========== Pending/Disabled =========="
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
