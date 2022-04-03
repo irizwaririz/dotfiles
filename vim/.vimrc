@@ -323,6 +323,8 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+" Give more space for displaying messages
+set cmdheight=2
 
 "========== coc-explorer =========="
 " Easily instantiate file tree.
