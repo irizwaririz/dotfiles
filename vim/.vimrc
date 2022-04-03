@@ -1,3 +1,4 @@
+"========== System ==========" 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
 " configuration option turns out not to be necessary for the file named
@@ -33,6 +34,12 @@ let &undodir = expand('~/.vim/undo//')
 if !isdirectory(&undodir) | call mkdir(&undodir, "p", 0700) | endif
 if !isdirectory(&backupdir) | call mkdir(&backupdir, "p", 0700) | endif
 if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
+" By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
+" shown in any window) that has unsaved changes. This is to prevent you from "
+" forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
+" hidden buffers helpful enough to disable this protection. See `:help hidden`
+" for more information on this.
+set hidden
 
 "========== Plugins ==========" 
 " Automatic installation of vim-plug if it's not yet installed.
@@ -145,7 +152,7 @@ set smartcase
 " Enable searching as you type, rather than waiting till you press enter.
 set incsearch
 
-"========== General Mapping =========="
+"========== General Mappings =========="
 " This will make Y behave like D/C.
 nnoremap Y y$
 " This will allow us to apply macros to visually selected lines (per line)
@@ -250,6 +257,8 @@ nnoremap <C-p> :Files<CR>
 nnoremap <C-g> :RG<CR>
 " Open git log window easily.
 nnoremap <leader>gl :Commits<CR>
+" Open buffer list window easily.
+nnoremap <leader>b :Buffers<CR>
 " Re-map horizontal window split file opening to <C-s> for consistency.
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
@@ -335,25 +344,18 @@ endfunction
 let g:floaterm_width=0.9
 let g:floaterm_height=0.9
 " Easily instantiate a floating terminal.
-nnoremap   <silent>   <F7>    :FloatermNew<CR>
-tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <F7> :FloatermNew<CR>
+tnoremap <silent> <F7> <C-\><C-n>:FloatermNew<CR>
 " Easily navigate between floating terminals.
-nnoremap   <silent>   <F8>    :FloatermPrev<CR>
-tnoremap   <silent>   <F8>    <C-\><C-n>:FloatermPrev<CR>
-nnoremap   <silent>   <F9>    :FloatermNext<CR>
-tnoremap   <silent>   <F9>    <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <F8> :FloatermPrev<CR>
+tnoremap <silent> <F8> <C-\><C-n>:FloatermPrev<CR>
+nnoremap <silent> <F9> :FloatermNext<CR>
+tnoremap <silent> <F9> <C-\><C-n>:FloatermNext<CR>
 " Easily toggle an existing floating terminal.
-nnoremap   <silent>   <F12>   :FloatermToggle<CR>
-tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <F12> :FloatermToggle<CR>
+tnoremap <silent> <F12> <C-\><C-n>:FloatermToggle<CR>
 
 "========== Pending/Disabled =========="
-" By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
-" shown in any window) that has unsaved changes. This is to prevent you from "
-" forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
-" hidden buffers helpful enough to disable this protection. See `:help hidden`
-" for more information on this.
-" set hidden
-"
 " For netrw:
 " Instantiate netrw explorer window easily.
 " nnoremap <leader>pv :Lex<CR>
