@@ -17,6 +17,8 @@ function install {
 # basic packages
 install curl
 install wget
+
+# development
 install git
 install stow
 install ripgrep
@@ -25,6 +27,10 @@ install tmux
 # vim dependencies
 install libncurses5-dev
 install libxt-dev
+
+# system management
+install htop
+install ncdu
 
 # Run all installation scripts in programs/
 for f in programs/*.sh; do bash "$f" -H; done
