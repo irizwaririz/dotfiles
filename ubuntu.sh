@@ -20,6 +20,7 @@ install wget
 install git
 install stow
 install ripgrep
+install tmux
 
 # vim dependencies
 install libncurses5-dev
