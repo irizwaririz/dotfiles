@@ -1,4 +1,4 @@
-"========== System ==========" 
+"========== System =========="
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
 " configuration option turns out not to be necessary for the file named
@@ -7,7 +7,7 @@
 " loaded some other way (e.g. saved as `foo`, and then Vim started with
 " `vim -u foo`).
 set nocompatible
-" Automatically refresh currently opened file/s when the file/s have been 
+" Automatically refresh currently opened file/s when the file/s have been
 " changed outside of vim.
 set autoread
 " Copy/Paste/Cut using system clipboard.
@@ -41,7 +41,7 @@ if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 " for more information on this.
 set hidden
 
-"========== Plugins ==========" 
+"========== Plugins =========="
 " Automatic installation of vim-plug if it's not yet installed.
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 " NOTE: The installation won't work if the curl package is not installed.
@@ -71,7 +71,7 @@ Plug 'tpope/vim-fugitive'
 if has('nvim-0.4.0') || has('patch-8.2.191')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  Plug 'stsewd/fzf-checkout.vim'  
+  Plug 'stsewd/fzf-checkout.vim'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " vim must have the :terminal command for this to work properly.
   if exists(':terminal')
@@ -170,6 +170,28 @@ let mapleader = " "
 nnoremap <leader>+ :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
 
+"========== Trailing Whitespace =========="
+" Function that highlights any space before a tab character or any
+" space or tab at the end of a line
+function ShowSpaces(...)
+  let @/='\v(\s+$)|( +\ze\t)'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
+" This creates a command for the ShowSpaces function called ShowSpaces
+command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+" Map the ShowSpaces command to <F5>
+nnoremap <F5> :ShowSpaces 1<CR>
+" Toggle showing the results of ShowSpaces
+noremap <F4> :set hlsearch! hlsearch?<CR>
+" Mapping for deleting all trailing spaces
+nnoremap <leader>ds :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 "========== Movement =========="
 " The backspace key has slightly unintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
@@ -209,7 +231,7 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "========== Modes =========="
 " 'Q' in normal mode enters Ex mode. You almost never want this.
-nnoremap Q <Nop> 
+nnoremap Q <Nop>
 " This will make exiting insert mode to normal mode more efficiently.
 inoremap jk <ESC>
 inoremap kj <ESC>
