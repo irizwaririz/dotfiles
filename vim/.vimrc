@@ -287,8 +287,10 @@ let g:fzf_action = {
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit' }
 " Better fuzzy searching using ripgrep (but only if ripgrep is installed).
+" NOTE: Replace `-uu` with `--hidden` if you want to show hidden files but not
+" files covered by `.gitignore`s.
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  let $FZF_DEFAULT_COMMAND = 'rg --files -uu --follow --glob "!.git/*"'
 endif
 
 "========== fzf-checkout =========="
