@@ -18,6 +18,7 @@ function install {
 install curl
 install wget
 install make
+install gcc
 
 # development
 install git
