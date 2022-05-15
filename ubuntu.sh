@@ -17,6 +17,7 @@ function install {
 # basic packages
 install curl
 install wget
+install make
 
 # development
 install git
