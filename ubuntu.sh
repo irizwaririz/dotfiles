@@ -30,6 +30,9 @@ install tmux
 install libncurses5-dev
 install libxt-dev
 
+# tmux dependencies
+install xclip
+
 # system management
 install htop
 install ncdu
