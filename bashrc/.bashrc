@@ -123,4 +123,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Xserver
-export DISPLAY=localhost:0.0
+# export DISPLAY=localhost:0.0
