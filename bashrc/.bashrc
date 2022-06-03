@@ -124,3 +124,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Xserver
 # export DISPLAY=localhost:0.0
+
+# Enable vi mode
+# To check all available vi keybindings, run the following command (be sure to be in normal mode):
+# $ bind -P
+set -o vi
