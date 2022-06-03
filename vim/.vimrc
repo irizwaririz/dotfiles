@@ -255,8 +255,16 @@ let g:netrw_liststyle=3
 let g:netrw_winsize=25
 
 "========== vim-fugitive =========="
-" Easily open the git status window.
-nnoremap <leader>gs :G<CR>
+" Easily open/close (toggle) the git status window.
+nnoremap <leader>gs :call ToggleGStatus()<CR>
+
+function! ToggleGStatus()
+    if buflisted(bufname('.git/index'))
+        bd .git/index
+    else
+        G
+    endif
+endfunction
 " Easily open the git blame window.
 nnoremap <leader>gb :Git blame<CR>
 
