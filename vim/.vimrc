@@ -67,6 +67,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
+Plug 'romainl/vim-cool'
 
 " vim must have the popupwin feature for these to work properly.
 if has('nvim-0.4.0') || has('patch-8.2.191')
@@ -152,6 +153,8 @@ set ignorecase
 set smartcase
 " Enable searching as you type, rather than waiting till you press enter.
 set incsearch
+" Enable highlighting of all search term matches.
+set hlsearch
 
 "========== General Mappings =========="
 " This will make Y behave like D/C.
@@ -163,6 +166,8 @@ function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
+" Easily toggle paste mode.
+nnoremap <leader>pp :set paste!<CR>
 
 "========== General Leader Mappings =========="
 " Set leader key to spacebar.
@@ -419,4 +424,6 @@ let g:undotree_SplitWidth = 45
 " if exists('*complete_info')
 "   inoremap <silent><expr> <CR> complete_info(['selected'])['selected'] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
 " endif
-
+" 
+" Easily remove highlighting on searched text.
+" map <ESC> :nohlsearch<CR>
