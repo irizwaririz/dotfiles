@@ -129,3 +129,7 @@ export NVM_DIR="$HOME/.nvm"
 # To check all available vi keybindings, run the following command (be sure to be in normal mode):
 # $ bind -P
 set -o vi
+
+# Set vim as default editor
+export EDITOR=vim
+export VISUAL=vim
