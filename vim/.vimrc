@@ -167,7 +167,7 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 " Easily toggle paste mode.
-nnoremap <leader>pp :set paste!<CR>
+set pastetoggle=<F2>
 
 "========== General Leader Mappings =========="
 " Set leader key to spacebar.
