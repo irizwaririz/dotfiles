@@ -68,6 +68,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'romainl/vim-cool'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " vim must have the popupwin feature for these to work properly.
 if has('nvim-0.4.0') || has('patch-8.2.191')
