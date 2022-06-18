@@ -1,4 +1,4 @@
-"========== System =========="
+" ---------------------------------- System ----------------------------------
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
 " configuration option turns out not to be necessary for the file named
@@ -41,7 +41,7 @@ if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 " for more information on this.
 set hidden
 
-"========== Plugins =========="
+" ---------------------------------- Plugins ---------------------------------
 " Automatic installation of vim-plug if it's not yet installed.
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 " NOTE: The installation won't work if the curl package is not installed.
@@ -92,7 +92,7 @@ endif
 
 call plug#end()
 
-"========== User Interface =========="
+" ------------------------------ User Interface ------------------------------
 " Use the gruvbox plugin as our colorscheme (in dark mode).
 colorscheme gruvbox
 set background=dark
@@ -113,7 +113,8 @@ set number
 " jump up or down to a particular line, by {count}k to go up or {count}j to go
 " down.
 set relativenumber
-" Always show the status line at the bottom, even if you only have one window open.
+" Always show the status line at the bottom, even if you only have one window
+" open.
 set laststatus=2
 " Disable audible/visual bell because it's annoying.
 set noerrorbells visualbell t_vb=
@@ -131,7 +132,7 @@ set splitright
 " Show row and column number of cursor position.
 set ruler
 
-"==========  Tabs and Indentation =========="
+" --------------------------- Tabs and Indentation ---------------------------
 " Number of visual spaces per TAB.
 set tabstop=4
 " Number of spaces in TAB when editing.
@@ -146,7 +147,7 @@ set smarttab
 " keep same indent as the line you're currently on.
 set autoindent
 
-"========== Searching =========="
+" --------------------------------- Searching --------------------------------
 " This setting makes search case-insensitive when all characters in the string
 " being searched are lowercase. However, the search becomes case-sensitive if
 " it contains any capital letters. This makes searching more convenient.
@@ -157,7 +158,7 @@ set incsearch
 " Enable highlighting of all search term matches.
 set hlsearch
 
-"========== General Mappings =========="
+" ----------------------------- General Mappings -----------------------------
 " This will make Y behave like D/C.
 nnoremap Y y$
 " This will allow us to apply macros to visually selected lines (per line)
@@ -170,14 +171,14 @@ endfunction
 " Easily toggle paste mode.
 set pastetoggle=<F2>
 
-"========== General Leader Mappings =========="
+" -------------------------- General Leader Mappings -------------------------
 " Set leader key to spacebar.
 let mapleader = " "
 " Resize windows easily.
 nnoremap <leader>+ :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
 
-"========== Trailing Whitespace =========="
+" ---------------------------- Trailing Whitespace ---------------------------
 " Function that highlights any space before a tab character or any
 " space or tab at the end of a line
 function ShowSpaces(...)
@@ -199,7 +200,7 @@ noremap <F4> :set hlsearch! hlsearch?<CR>
 " Mapping for deleting all trailing spaces
 nnoremap <leader>ds :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
-"========== Movement =========="
+" --------------------------------- Movement ---------------------------------
 " The backspace key has slightly unintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
 " This configuration makes backspace behave more reasonably, in that you can
@@ -236,14 +237,14 @@ nnoremap <leader>k :m .-2<CR>==
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-"========== Modes =========="
+" ----------------------------------- Modes ----------------------------------
 " 'Q' in normal mode enters Ex mode. You almost never want this.
 nnoremap Q <Nop>
 " This will make exiting insert mode to normal mode more efficiently.
 inoremap jk <ESC>
 inoremap kj <ESC>
 
-"========== netrw (coc-explorer is currently preferred over this) =========="
+" ----------- netrw (coc-explorer is currently preferred over this) ----------
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
 " <C-l> to move to the right window split will still work on netrw.
 augroup netrw_mapping
@@ -260,7 +261,7 @@ let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size.
 let g:netrw_winsize=25
 
-"========== vim-fugitive =========="
+" ------------------------------- vim-fugitive -------------------------------
 " Easily open/close (toggle) the git status window.
 nnoremap <leader>gs :call ToggleGStatus()<CR>
 
@@ -274,7 +275,7 @@ endfunction
 " Easily open the git blame window.
 nnoremap <leader>gb :Git blame<CR>
 
-"========== fzf =========="
+" ------------------------------------ fzf -----------------------------------
 " Advanced ripgrep integration (i.e. actually use ripgrep when searching in
 " multiple files). This will be mapped to :RG.
 function! RipgrepFzf(query, fullscreen)
@@ -308,11 +309,11 @@ if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files -uu --follow --glob "!.git/*"'
 endif
 
-"========== fzf-checkout =========="
+" ------------------------------- fzf-checkout -------------------------------
 " Open the git branches window easily.
 nnoremap <leader>gc :GBranches<CR>
 
-"========== coc.nvim =========="
+" --------------------------------- coc.nvim ---------------------------------
 " Automatically install coc extensions if missing.
 let g:coc_global_extensions = [ 'coc-pyright', 'coc-explorer', 'coc-json' ]
 " Use tab for trigger completion with characters ahead and navigate.
@@ -338,7 +339,8 @@ endif
 " no item has been selected.
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 " Use `[g` and `]g` to navigate diagnostics.
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location
+" list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
@@ -365,11 +367,11 @@ nmap <leader>rn <Plug>(coc-rename)
 " Give more space for displaying messages
 set cmdheight=2
 
-"========== coc-explorer =========="
+" ------------------------------- coc-explorer -------------------------------
 " Easily instantiate file tree.
 nnoremap <leader>pv :CocCommand explorer<CR>
 
-"========== vim-signify  =========="
+" -------------------------------- vim-signify -------------------------------
 " Show current and total hunks when jumping between hunks.
 autocmd User SignifyHunk call s:show_current_hunk()
 
@@ -380,7 +382,7 @@ function! s:show_current_hunk() abort
   endif
 endfunction
 
-"========== vim-floaterm  =========="
+" ------------------------------- vim-floaterm -------------------------------
 " Set width and height of floating terminals.
 let g:floaterm_width=0.9
 let g:floaterm_height=0.9
@@ -396,7 +398,7 @@ tnoremap <silent> <F9> <C-\><C-n>:FloatermNext<CR>
 nnoremap <silent> <F12> :FloatermToggle<CR>
 tnoremap <silent> <F12> <C-\><C-n>:FloatermToggle<CR>
 
-"========== undotree  =========="
+" --------------------------------- undotree ---------------------------------
 " Easily instantiate the undotree window.
 nnoremap <leader>u :UndotreeToggle<CR>
 " Set cursor/focus on the undotree window after being opened.
@@ -404,7 +406,7 @@ let g:undotree_SetFocusWhenToggle = 1
 " Instantiate the undotree window with proper window size.
 let g:undotree_SplitWidth = 45
 
-"========== Pending/Disabled =========="
+" ----------------------------- Pending/Disabled -----------------------------
 " For netrw:
 " Instantiate netrw explorer window easily.
 " nnoremap <leader>pv :Lex<CR>
