@@ -170,6 +170,8 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 " Easily toggle paste mode.
 set pastetoggle=<F2>
+" Easily do black hole register deletion (i.e. really delete not cut).
+noremap <leader>d "_d
 
 " -------------------------- General Leader Mappings -------------------------
 " Set leader key to spacebar.
@@ -238,7 +240,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " ----------------------------------- Modes ----------------------------------
-" 'Q' in normal mode enters Ex mode. You almost never want this.
+" 'Q' in normal mode enters Ex mode. This is disabled for now.
 nnoremap Q <Nop>
 " This will make exiting insert mode to normal mode more efficiently.
 inoremap jk <ESC>
