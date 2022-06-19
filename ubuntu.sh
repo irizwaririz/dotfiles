@@ -26,6 +26,9 @@ install stow
 install ripgrep
 install tmux
 
+# st dependencies
+install libxft-dev
+
 # vim dependencies
 install libncurses5-dev
 install libxt-dev
