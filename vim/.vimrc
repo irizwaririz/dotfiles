@@ -69,6 +69,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'romainl/vim-cool'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 " vim must have the popupwin feature for these to work properly.
 if has('nvim-0.4.0') || has('patch-8.2.191')
@@ -410,6 +411,18 @@ nnoremap <leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle = 1
 " Instantiate the undotree window with proper window size.
 let g:undotree_SplitWidth = 45
+
+" -------------------------------- vim-oscyank -------------------------------
+" Automatically call OSC52 function on yank to sync register with system
+" clipboard.
+augroup Osc52Yank
+  autocmd!
+  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+augroup END
+" This makes the plugin with work tmux.
+let g:oscyank_term = 'default'
+" Remove confirmation message when yanking.
+let g:oscyank_silent = v:true
 
 " ----------------------------- Pending/Disabled -----------------------------
 " For netrw:
