@@ -173,9 +173,6 @@ endfunction
 set pastetoggle=<F2>
 " Easily do black hole register deletion (i.e. really delete not cut).
 noremap <leader>d "_d
-" Remove space mapping in visual mode so we can properly use black hole
-" register deletion.
-vnoremap <space> <Nop> 
 
 " -------------------------- General Leader Mappings -------------------------
 " Set leader key to spacebar.
