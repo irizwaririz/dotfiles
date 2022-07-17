@@ -203,6 +203,28 @@ noremap <F4> :set hlsearch! hlsearch?<CR>
 " Mapping for deleting all trailing spaces
 nnoremap <leader>ds :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+" ----------------------------- Window Splits Zoom ---------------------------
+" Function that toggles zooming in and out of a specific window split.
+function! ToggleZoom(toggle)
+  if exists("t:restore_zoom") && (t:restore_zoom.win != winnr() || a:toggle == v:true)
+      exec t:restore_zoom.cmd
+      unlet t:restore_zoom
+  elseif a:toggle
+      let t:restore_zoom = { 'win': winnr(), 'cmd': winrestcmd() }
+      vertical resize | resize
+  endif
+endfunction
+
+" This autocommand makes it so that it automatically zooms out (if currently
+" zoomed in) if we move to another window split that is not the currently
+" zoomed window split. It aims to mimic tmux's auto-unzoom effect.
+augroup restorezoom
+    autocmd WinEnter * silent! :call ToggleZoom(v:false)
+augroup END
+
+" Easily zoom in/out window splits.
+nnoremap <leader>z :call ToggleZoom(v:true)<CR>
+
 " --------------------------------- Movement ---------------------------------
 " The backspace key has slightly unintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
