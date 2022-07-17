@@ -181,28 +181,6 @@ let mapleader = " "
 nnoremap <leader>+ :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
 
-" ---------------------------- Trailing Whitespace ---------------------------
-" Function that highlights any space before a tab character or any
-" space or tab at the end of a line
-function ShowSpaces(...)
-  let @/='\v(\s+$)|( +\ze\t)'
-  let oldhlsearch=&hlsearch
-  if !a:0
-    let &hlsearch=!&hlsearch
-  else
-    let &hlsearch=a:1
-  end
-  return oldhlsearch
-endfunction
-" This creates a command for the ShowSpaces function called ShowSpaces
-command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
-" Map the ShowSpaces command to <F5>
-nnoremap <F5> :ShowSpaces 1<CR>
-" Toggle showing the results of ShowSpaces
-noremap <F4> :set hlsearch! hlsearch?<CR>
-" Mapping for deleting all trailing spaces
-nnoremap <leader>ds :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
 " ----------------------------- Window Splits Zoom ---------------------------
 " Function that toggles zooming in and out of a specific window split.
 function! ToggleZoom(toggle)
