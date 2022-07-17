@@ -410,6 +410,9 @@ let g:undotree_SetFocusWhenToggle = 1
 " Instantiate the undotree window with proper window size.
 let g:undotree_SplitWidth = 45
 
+" --------------------------------- vim-cool ---------------------------------
+let g:CoolTotalMatches = 1
+
 " -------------------------------- vim-oscyank -------------------------------
 " Automatically call OSC52 function on yank to sync register with system
 " clipboard.
