@@ -411,6 +411,7 @@ let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_SplitWidth = 45
 
 " --------------------------------- vim-cool ---------------------------------
+" Show number of matches in the command-line when searching.
 let g:CoolTotalMatches = 1
 
 " -------------------------------- vim-oscyank -------------------------------
