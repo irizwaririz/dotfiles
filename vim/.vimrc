@@ -12,7 +12,7 @@ set nocompatible
 set autoread
 " Copy/Paste/Cut using system clipboard.
 if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
+    set clipboard=unnamed,unnamedplus
 endif
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -46,19 +46,19 @@ set hidden
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 " NOTE: The installation won't work if the curl package is not installed.
 if has('win32')&&!has('win64')
-  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+    let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
 else
-  let curl_exists=expand('curl')
+    let curl_exists=expand('curl')
 endif
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-  if !executable(curl_exists)
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    if !executable(curl_exists)
+        echoerr "You have to install curl or first install vim-plug yourself!"
+        execute "q!"
+    endif
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " NOTE: This line below is not given in the link above but it's required
 " or an error will appear on execution (i.e. PlugInstall is dependent on it).
@@ -73,22 +73,22 @@ Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 " vim must have the popupwin feature for these to work properly.
 if has('nvim-0.4.0') || has('patch-8.2.191')
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'stsewd/fzf-checkout.vim'
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-  " vim must have the :terminal command for this to work properly.
-  if exists(':terminal')
-    Plug 'voldikss/vim-floaterm'
-  endif
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'stsewd/fzf-checkout.vim'
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+    " vim must have the :terminal command for this to work properly.
+    if exists(':terminal')
+        Plug 'voldikss/vim-floaterm'
+    endif
 endif
 
 " The master branch is async-only and thus requires at least Vim 8.0.902.
 " Use the legacy branch for older Vim versions.
 if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
+    Plug 'mhinz/vim-signify'
 else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+    Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
 call plug#end()
@@ -166,8 +166,8 @@ nnoremap Y y$
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 " Easily toggle paste mode.
 set pastetoggle=<F2>
@@ -184,19 +184,20 @@ nnoremap <leader>- :vertical resize -10<CR>
 " ----------------------------- Window Splits Zoom ---------------------------
 " Function that toggles zooming in and out of a specific window split.
 function! ToggleZoom(toggle)
-  if exists("t:restore_zoom") && (t:restore_zoom.win != winnr() || a:toggle == v:true)
-      exec t:restore_zoom.cmd
-      unlet t:restore_zoom
-  elseif a:toggle
-      let t:restore_zoom = { 'win': winnr(), 'cmd': winrestcmd() }
-      vertical resize | resize
-  endif
+    if exists("t:restore_zoom") && (t:restore_zoom.win != winnr() || a:toggle == v:true)
+        exec t:restore_zoom.cmd
+        unlet t:restore_zoom
+    elseif a:toggle
+        let t:restore_zoom = { 'win': winnr(), 'cmd': winrestcmd() }
+        vertical resize | resize
+    endif
 endfunction
 
 " This autocommand makes it so that it automatically zooms out (if currently
 " zoomed in) if we move to another window split that is not the currently
 " zoomed window split. It aims to mimic tmux's auto-unzoom effect.
 augroup restorezoom
+    autocmd!
     autocmd WinEnter * silent! :call ToggleZoom(v:false)
 augroup END
 
@@ -243,7 +244,7 @@ vnoremap K :m '<-2<CR>gv=gv
 " ----------------------------------- Modes ----------------------------------
 " 'Q' in normal mode enters Ex mode. This is disabled for now.
 nnoremap Q <Nop>
-" This will make exiting insert mode to normal mode more efficiently.
+" This will make exiting insert mode to normal mode more efficient.
 inoremap jk <ESC>
 inoremap kj <ESC>
 
@@ -282,11 +283,11 @@ nnoremap <leader>gb :Git blame<CR>
 " Advanced ripgrep integration (i.e. actually use ripgrep when searching in
 " multiple files). This will be mapped to :RG.
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+    let initial_command = printf(command_fmt, shellescape(a:query))
+    let reload_command = printf(command_fmt, '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
@@ -302,14 +303,14 @@ nnoremap <leader>gl :Commits<CR>
 nnoremap <leader>b :Buffers<CR>
 " Re-map horizontal window split file opening to <C-s> for consistency.
 let g:fzf_action = {
-    \ 'ctrl-t': 'tab split',
-    \ 'ctrl-s': 'split',
-    \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-s': 'split',
+            \ 'ctrl-v': 'vsplit'}
 " Better fuzzy searching using ripgrep (but only if ripgrep is installed).
 " NOTE: Replace `-uu` with `--hidden` if you want to show hidden files but not
 " files covered by `.gitignore`s.
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files -uu --follow --glob "!.git/*"'
+    let $FZF_DEFAULT_COMMAND = 'rg --files -uu --follow --glob "!.git/*"'
 endif
 
 " ------------------------------- fzf-checkout -------------------------------
@@ -323,20 +324,20 @@ let g:coc_global_extensions = [ 'coc-pyright', 'coc-explorer', 'coc-json' ]
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <C-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <C-space> coc#refresh()
+    inoremap <silent><expr> <C-space> coc#refresh()
 else
-  inoremap <silent><expr> <C-@> coc#refresh()
+    inoremap <silent><expr> <C-@> coc#refresh()
 endif
 " Make <CR> select the first completion item and confirm the completion when
 " no item has been selected.
@@ -355,13 +356,13 @@ nnoremap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
 endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -379,10 +380,10 @@ nnoremap <leader>pv :CocCommand explorer<CR>
 autocmd User SignifyHunk call s:show_current_hunk()
 
 function! s:show_current_hunk() abort
-  let h = sy#util#get_hunk_stats()
-  if !empty(h)
-    echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
-  endif
+    let h = sy#util#get_hunk_stats()
+    if !empty(h)
+        echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
+    endif
 endfunction
 
 " ------------------------------- vim-floaterm -------------------------------
@@ -413,8 +414,8 @@ let g:undotree_SplitWidth = 45
 " Automatically call OSC52 function on yank to sync register with system
 " clipboard.
 augroup Osc52Yank
-  autocmd!
-  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+    autocmd!
+    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
 augroup END
 " This makes the plugin with work tmux.
 let g:oscyank_term = 'default'
