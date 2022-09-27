@@ -171,8 +171,6 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 " Easily toggle paste mode.
 set pastetoggle=<F2>
-" Easily do black hole register deletion (i.e. really delete not cut).
-noremap <leader>d "_d
 
 " -------------------------- General Leader Mappings -------------------------
 " Set leader key to spacebar.
@@ -180,6 +178,10 @@ let mapleader = " "
 " Resize windows easily.
 nnoremap <leader>+ :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
+" Easily do black hole register deletion (i.e. really delete not cut).
+nmap <leader>d "_d
+" Easily copy relative filepath of current file to the clipboard
+nnoremap <leader>cp :let @+=@%<CR>
 
 " ----------------------------- Window Splits Zoom ---------------------------
 " Function that toggles zooming in and out of a specific window split.
