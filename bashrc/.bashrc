@@ -126,8 +126,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Xserver
+# Xserver (VcXsrv)
+# WSL1
 # export DISPLAY=localhost:0.0
+# WSL2
+export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
 
 # Enable vi mode
 # To check all available vi keybindings, run the following command (be sure to be in normal mode):
