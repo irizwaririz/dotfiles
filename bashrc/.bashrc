@@ -91,7 +91,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias rm='rm -i'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -105,6 +104,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# Put these aliases to ~/.bash_aliases when it grows too big
+# Confirm before removing files
+alias rm='rm -i'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
