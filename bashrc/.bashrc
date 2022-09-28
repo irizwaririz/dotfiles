@@ -126,11 +126,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Xserver (VcXsrv)
-# WSL1
-# export DISPLAY=localhost:0.0
-# WSL2
-export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
+# Set DISPLAY to use a X terminal in WSL through a X server (VcXsrv)
+if grep -q WSL2 /proc/version; then
+    # In WSL2 the localhost and network interfaces are not the same than windows
+    # Execute route.exe in the windows to determine its IP address
+    DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
+else
+    # In WSL1 the DISPLAY can be the localhost address
+    if grep -q icrosoft /proc/version; then
+        DISPLAY=127.0.0.1:0.0
+    fi
+fi
 
 # Enable vi mode
 # To check all available vi keybindings, run the following command (be sure to be in normal mode):
