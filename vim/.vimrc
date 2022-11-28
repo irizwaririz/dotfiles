@@ -272,8 +272,8 @@ let g:netrw_winsize=25
 nnoremap <leader>gs :call ToggleGStatus()<CR>
 
 function! ToggleGStatus()
-    if buflisted(bufname('.git/index'))
-        bd .git/index
+    if buflisted(bufname('.git/'))
+        bd .git/
     else
         G
     endif
