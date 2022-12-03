@@ -171,7 +171,7 @@ set pastetoggle=<F2>
 " Set leader key to spacebar.
 let mapleader = " "
 " Resize windows easily.
-nnoremap <leader>+ :vertical resize +10<CR>
+nnoremap <leader>= :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
 " Easily do black hole register deletion (i.e. really delete not cut).
 nmap <leader>d "_d
