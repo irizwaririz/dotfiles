@@ -68,7 +68,6 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'romainl/vim-cool'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 " vim must have the popupwin feature for these to work properly.
@@ -77,10 +76,6 @@ if has('nvim-0.4.0') || has('patch-8.2.191')
     Plug 'junegunn/fzf.vim'
     Plug 'stsewd/fzf-checkout.vim'
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-    " vim must have the :terminal command for this to work properly.
-    if exists(':terminal')
-        Plug 'voldikss/vim-floaterm'
-    endif
 endif
 
 " The master branch is async-only and thus requires at least Vim 8.0.902.
@@ -389,22 +384,6 @@ function! s:show_current_hunk() abort
         echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
     endif
 endfunction
-
-" ------------------------------- vim-floaterm -------------------------------
-" Set width and height of floating terminals.
-let g:floaterm_width=0.9
-let g:floaterm_height=0.9
-" Easily instantiate a floating terminal.
-nnoremap <silent> <F7> :FloatermNew<CR>
-tnoremap <silent> <F7> <C-\><C-n>:FloatermNew<CR>
-" Easily navigate between floating terminals.
-nnoremap <silent> <F8> :FloatermPrev<CR>
-tnoremap <silent> <F8> <C-\><C-n>:FloatermPrev<CR>
-nnoremap <silent> <F9> :FloatermNext<CR>
-tnoremap <silent> <F9> <C-\><C-n>:FloatermNext<CR>
-" Easily toggle an existing floating terminal.
-nnoremap <silent> <F12> :FloatermToggle<CR>
-tnoremap <silent> <F12> <C-\><C-n>:FloatermToggle<CR>
 
 " --------------------------------- undotree ---------------------------------
 " Easily instantiate the undotree window.
