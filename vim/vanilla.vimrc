@@ -201,6 +201,8 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 
 " ----------- netrw (coc-explorer is currently preferred over this) ----------
+" Instantiate netrw explorer window easily.
+nnoremap <leader>pv :Lex<CR>
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
 " <C-l> to move to the right window split will still work on netrw.
 augroup netrw_mapping
@@ -215,39 +217,19 @@ let g:netrw_banner=0
 " Make netrw list the directories as trees.
 let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size.
-let g:netrw_winsize=25
+let g:netrw_winsize=20
 
+" ----------------------------- Pending/Disabled -----------------------------
+" Easily remove highlighting on searched text.
+" map <ESC> :nohlsearch<CR>
+"
+" The following needs to be implemented in vanilla vim. Still thinking of a
+" way to achieve it without plugins.
 " Open fzf file searching window easily.
 " nnoremap <C-p> :Files<CR>
 " Open fzf ripgrep searching window easily.
 " nnoremap <C-g> :RG<CR>
 " Open buffer list window easily.
 " nnoremap <leader>b :Buffers<CR>
-
 " GoTo code navigation.
 " nnoremap <silent> gd <Plug>(coc-definition)
-
-" ----------------------------- Pending/Disabled -----------------------------
-" For netrw:
-" Instantiate netrw explorer window easily.
-" nnoremap <leader>pv :Lex<CR>
-"
-" This currently makes it hard to navigate with vim-signify. So this is
-" disabled for now.
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-" if has("nvim-0.5.0") || has("patch-8.1.1564")
-"   " Recently vim can merge signcolumn and number column into one
-"   set signcolumn=number
-" else
-"   set signcolumn=yes
-" endif
-"
-" For coc.nvim:
-" Make <CR> confirm completion, only when there's selected complete item.
-" if exists('*complete_info')
-"   inoremap <silent><expr> <CR> complete_info(['selected'])['selected'] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
-" endif
-" 
-" Easily remove highlighting on searched text.
-" map <ESC> :nohlsearch<CR>
