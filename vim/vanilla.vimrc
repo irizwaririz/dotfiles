@@ -51,6 +51,8 @@ set showcmd
 syntax on
 " Better command-line completion.
 set wildmenu
+" Case insensitive command-line completion.
+set wildignorecase
 " Disable the default Vim startup message.
 set shortmess+=I
 " Show line numbers.
@@ -200,8 +202,32 @@ nnoremap Q <Nop>
 inoremap jk <ESC>
 inoremap kj <ESC>
 
-" ----------- netrw (coc-explorer is currently preferred over this) ----------
-" Instantiate netrw explorer window easily.
+" ------------------------------- Finding Files ------------------------------
+" Enable downward search, this makes it so that we can find files deep into
+" our directories.
+setlocal path=.,**
+" Easily search files.
+nnoremap <C-p> :find 
+" Check list of open buffers and prompt to open a buffer.
+nnoremap <leader>b :b <C-d>
+" Do not display these directories/files in the wildmenu.
+set wildignore=*.git/*,*.tags,tags
+
+" ----------------------------------- Ctags ----------------------------------
+" - Use <C-]> to jump to tag under cursor.
+" - Use g<C-]> for ambiguous tags.
+" - Use <C-t> to jump back up the tag stack.
+command! MakeTags !ctags -R .
+
+" ------------------------------- Autocomplete -------------------------------
+" - Use <C-n> or <C-p> to autocomplete anything given by the 'complete'
+"   option.
+" - Use <C-x><C-f> to autocomplete filenames
+" Do not give insert completion messages
+set shortmess+=c
+
+" ----------------------------------- netrw ---------------------------------- 
+" Instantiate the netrw explorer window easily.
 nnoremap <leader>pv :Lex<CR>
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
 " <C-l> to move to the right window split will still work on netrw.
@@ -222,14 +248,13 @@ let g:netrw_winsize=20
 " ----------------------------- Pending/Disabled -----------------------------
 " Easily remove highlighting on searched text.
 " map <ESC> :nohlsearch<CR>
-"
+" Easily add files in the buffer list.
+" nnoremap <leader>a :argadd <C-r>=fnameescape(expand('%:p:h'))<CR>/*<C-d>
+" Change how the wildmenu completion is done.
+" set wildmode=longest:full,full
+" Change how insert mode completion gives suggestions.
+" set completeopt=menuone,longest
 " The following needs to be implemented in vanilla vim. Still thinking of a
 " way to achieve it without plugins.
-" Open fzf file searching window easily.
-" nnoremap <C-p> :Files<CR>
 " Open fzf ripgrep searching window easily.
 " nnoremap <C-g> :RG<CR>
-" Open buffer list window easily.
-" nnoremap <leader>b :Buffers<CR>
-" GoTo code navigation.
-" nnoremap <silent> gd <Plug>(coc-definition)
