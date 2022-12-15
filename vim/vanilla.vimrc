@@ -40,6 +40,7 @@ if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 " hidden buffers helpful enough to disable this protection. See `:help hidden`
 " for more information on this.
 set hidden
+" Make use of our filetype plugins.
 filetype plugin on
 
 " ------------------------------ User Interface ------------------------------
