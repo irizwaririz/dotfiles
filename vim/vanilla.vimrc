@@ -40,6 +40,7 @@ if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 " hidden buffers helpful enough to disable this protection. See `:help hidden`
 " for more information on this.
 set hidden
+filetype plugin on
 
 " ------------------------------ User Interface ------------------------------
 " Use the gruvbox plugin as our colorscheme (in dark mode).
