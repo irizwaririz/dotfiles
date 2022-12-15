@@ -251,6 +251,7 @@ let g:netrw_winsize=20
 noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 
+" Taken from: https://github.com/romainl/vim-cool/issues/9
 function! HlSearch()
     let s:pos = match(getline('.'), @/, col('.') - 1) + 1
     if s:pos != col('.')
