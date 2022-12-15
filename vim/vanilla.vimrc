@@ -245,9 +245,34 @@ let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size.
 let g:netrw_winsize=20
 
+" ------------------------- Dynamic Highlight Search -------------------------
+" These makes it so that vim disables search highlighting when you are 
+" "done searching" and re-enables it when you search again.
+noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+
+function! HlSearch()
+    let s:pos = match(getline('.'), @/, col('.') - 1) + 1
+    if s:pos != col('.')
+        call StopHL()
+    endif
+endfunction
+
+function! StopHL()
+    if !v:hlsearch || mode() isnot 'n'
+        return
+    else
+        sil call feedkeys("\<Plug>(StopHL)", 'm')
+    endif
+endfunction
+
+augroup SearchHighlight
+autocmd!
+    autocmd CursorMoved * call HlSearch()
+    autocmd InsertEnter * call StopHL()
+augroup END
+
 " ----------------------------- Pending/Disabled -----------------------------
-" Easily remove highlighting on searched text.
-" map <ESC> :nohlsearch<CR>
 " Easily add files in the buffer list.
 " nnoremap <leader>a :argadd <C-r>=fnameescape(expand('%:p:h'))<CR>/*<C-d>
 " Change how the wildmenu completion is done.
