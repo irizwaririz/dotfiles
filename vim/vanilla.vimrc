@@ -44,7 +44,7 @@ set hidden
 filetype plugin on
 
 " ------------------------------ User Interface ------------------------------
-" Use the gruvbox plugin as our colorscheme (in dark mode).
+" Use the habamax as our colorscheme.
 colorscheme habamax
 set background=dark
 " Show (partial) commands in status line.
