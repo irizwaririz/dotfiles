@@ -19,6 +19,8 @@ install curl
 install wget
 install make
 install gcc
+install zip
+install unzip
 
 # development
 install git
