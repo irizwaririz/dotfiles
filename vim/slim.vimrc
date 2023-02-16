@@ -66,9 +66,9 @@ endif
 " or an error will appear on execution (i.e. PlugInstall is dependent on it).
 call plug#begin('~/.vim/plugged')
 
-Plug 'gruvbox-community/gruvbox'
-" Commented lines refer to plugins that I'm still not sure if it's okay to
-" remove
+" Commented lines refer to plugins that I'm still not sure if I should remove
+" or not.
+" Plug 'gruvbox-community/gruvbox'
 " Plug 'tpope/vim-fugitive'
 " Plug 'mbbill/undotree'
 
@@ -89,7 +89,7 @@ endif
 call plug#end()
 
 " ------------------------------ User Interface ------------------------------
-" Use the gruvbox plugin as our colorscheme (in dark mode).
+" Use gruvbox as our colorscheme (in dark mode).
 colorscheme gruvbox
 set background=dark
 " Show (partial) commands in status line.
