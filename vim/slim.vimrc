@@ -252,9 +252,9 @@ inoremap kj <ESC>
 " ------------------------------- Finding Files ------------------------------
 " Enable downward search, this makes it so that we can find files deep into
 " our directories.
-setlocal path=.,**
+set path=.,**
 " Do not display these directories/files in the wildmenu.
-set wildignore=*.git/*,*.tags,tags
+set wildignore=*.git/*,*.tags,tags,*venv/*
 
 " ----------------------------------- Ctags ----------------------------------
 " - Use <C-]> to jump to tag under cursor.

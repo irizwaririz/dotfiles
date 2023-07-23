@@ -207,19 +207,19 @@ inoremap kj <ESC>
 " ------------------------------- Finding Files ------------------------------
 " Enable downward search, this makes it so that we can find files deep into
 " our directories.
-setlocal path=.,**
+set path=.,**
 " Easily search files.
 nnoremap <C-p> :find 
 " Check list of open buffers and prompt to open a buffer.
 nnoremap <leader>b :b <C-d>
 " Do not display these directories/files in the wildmenu.
-set wildignore=*.git/*,*.tags,tags
+set wildignore=*.git/*,*.tags,tags,*venv/*
 
 " ----------------------------------- Ctags ----------------------------------
 " - Use <C-]> to jump to tag under cursor.
 " - Use g<C-]> for ambiguous tags.
 " - Use <C-t> to jump back up the tag stack.
-command! MakeTags !ctags -R .
+command! MakeTags !ctags -R --exclude=venv .
 
 " ------------------------------- Autocomplete -------------------------------
 " - Use <C-n> or <C-p> to autocomplete anything given by the 'complete'
