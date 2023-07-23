@@ -149,4 +149,3 @@ set -o vi
 # Set vim as default editor
 export EDITOR=vim
 export VISUAL=vim
-export PATH=~/.local/bin:"$PATH"
