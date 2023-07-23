@@ -68,7 +68,7 @@ call plug#begin('~/.vim/plugged')
 
 " Commented lines refer to plugins that I'm still not sure if I should remove
 " or not.
-" Plug 'gruvbox-community/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 " Plug 'tpope/vim-fugitive'
 " Plug 'mbbill/undotree'
 
@@ -260,7 +260,7 @@ set wildignore=*.git/*,*.tags,tags
 " - Use <C-]> to jump to tag under cursor.
 " - Use g<C-]> for ambiguous tags.
 " - Use <C-t> to jump back up the tag stack.
-command! MakeTags !ctags -R .
+command! MakeTags !ctags -R --exclude=venv .
 
 " ------------------------------- Autocomplete -------------------------------
 " - Use <C-n> or <C-p> to autocomplete anything given by the 'complete'
@@ -347,7 +347,7 @@ let g:fzf_action = {
 " NOTE: Replace `-uu` with `--hidden` if you want to show hidden files but not
 " files covered by `.gitignore`s.
 if executable('rg')
-    let $FZF_DEFAULT_COMMAND = 'rg --files -uu --follow --glob "!.git/*"'
+    let $FZF_DEFAULT_COMMAND = 'rg --files -uu --follow --glob "!.git/*" --glob "!venv/*"'
 endif
 
 " -------------------------------- vim-signify -------------------------------
