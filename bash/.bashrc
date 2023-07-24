@@ -149,3 +149,8 @@ set -o vi
 # Set vim as default editor
 export EDITOR=vim
 export VISUAL=vim
+
+# Enable Git completion features
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+fi
