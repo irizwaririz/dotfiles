@@ -247,6 +247,10 @@ let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size.
 let g:netrw_winsize=20
 
+" ---------------------------------- vimdiff ---------------------------------
+" Easily search across files
+nnoremap <C-g> :vimgrep // **/*<C-Left><Left><Left>
+
 " ------------------------- Dynamic Highlight Search -------------------------
 " These makes it so that vim disables search highlighting when you are 
 " "done searching" and re-enables it when you search again.
