@@ -288,6 +288,15 @@ let g:netrw_liststyle=3
 " Instantiate netrw window with proper window size.
 let g:netrw_winsize=20
 
+" ------------------------------- quickfix list ------------------------------
+" Easily navigate the quickfix list
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
+nnoremap ]Q :clast<CR>
+nnoremap [Q :cfirst<CR>
+" Easily open quickfix list window
+nnoremap <C-c> :cope<CR>
+
 " ------------------------- Dynamic Highlight Search -------------------------
 " These makes it so that vim disables search highlighting when you are 
 " "done searching" and re-enables it when you search again.
