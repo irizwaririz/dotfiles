@@ -112,6 +112,8 @@ set smartcase
 set incsearch
 " Enable highlighting of all search term matches.
 set hlsearch
+" Show search count message when searching, e.g. '[1/5]'
+set shortmess-=S
 
 " ----------------------------- General Mappings -----------------------------
 " This will make Y behave like D/C.
