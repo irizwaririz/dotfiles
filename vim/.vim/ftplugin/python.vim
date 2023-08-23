@@ -5,3 +5,9 @@ if executable('black')
     " Ensure we use formatprg instead of formatexpr
     setlocal formatexpr=
 endif
+
+" Ensure flake8 is installed
+if executable('flake8')
+    " Set makeprg
+    setlocal makeprg=flake8
+endif
