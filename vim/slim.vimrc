@@ -42,6 +42,8 @@ if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 set hidden
 " Make use of our filetype plugins.
 filetype plugin on
+" Extend % matching.
+packadd! matchit
 
 " ---------------------------------- Plugins ---------------------------------
 " Automatic installation of vim-plug if it's not yet installed.

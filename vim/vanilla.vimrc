@@ -42,6 +42,8 @@ if !isdirectory(&directory) | call mkdir(&directory, "p", 0700) | endif
 set hidden
 " Make use of our filetype plugins.
 filetype plugin on
+" Extend % matching.
+packadd! matchit
 
 " ------------------------------ User Interface ------------------------------
 " Use gruvbox as our colorscheme (in dark mode).
