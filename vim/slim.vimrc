@@ -362,6 +362,11 @@ if executable('rg')
 endif
 
 " -------------------------------- vim-signify -------------------------------
+" Create dedicated bindings for jumping between hunks (]c/[c is the default
+" but it is used by vim to jump between diffs)
+nnoremap ]h <plug>(signify-next-hunk)
+nnoremap [h <plug>(signify-prev-hunk)
+
 " Show current and total hunks when jumping between hunks.
 autocmd User SignifyHunk call s:show_current_hunk()
 
