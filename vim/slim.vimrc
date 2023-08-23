@@ -69,7 +69,6 @@ call plug#begin('~/.vim/plugged')
 " Commented lines refer to plugins that I'm still not sure if I should remove
 " or not.
 Plug 'gruvbox-community/gruvbox'
-" Plug 'tpope/vim-fugitive'
 " Plug 'mbbill/undotree'
 
 " vim must have the popupwin feature for these to work properly.
@@ -378,33 +377,8 @@ function! s:show_current_hunk() abort
 endfunction
 
 " ----------------------------- Pending/Disabled -----------------------------
-" This currently makes it hard to navigate with vim-signify. So this is
-" disabled for now.
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-" if has("nvim-0.5.0") || has("patch-8.1.1564")
-"   " Recently vim can merge signcolumn and number column into one
-"   set signcolumn=number
-" else
-"   set signcolumn=yes
-" endif
-" 
 " Easily remove highlighting on searched text.
 " map <ESC> :nohlsearch<CR>
-"
-" ------------------------------- vim-fugitive -------------------------------
-" Easily open/close (toggle) the git status window.
-" nnoremap <leader>gs :call ToggleGStatus()<CR>
-" 
-" function! ToggleGStatus()
-"     if buflisted(bufname('.git/'))
-"         bd .git/
-"     else
-"         G
-"     endif
-" endfunction
-" Easily open the git blame window.
-" nnoremap <leader>gb :Git blame<CR>
 "
 " --------------------------------- undotree ---------------------------------
 " Easily instantiate the undotree window.
