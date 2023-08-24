@@ -88,6 +88,8 @@ endif
 call plug#end()
 
 " ------------------------------ User Interface ------------------------------
+" Enable truecolor support.
+set termguicolors
 " Use gruvbox as our colorscheme (in dark mode).
 colorscheme gruvbox
 set background=dark
