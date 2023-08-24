@@ -68,10 +68,8 @@ endif
 " or an error will appear on execution (i.e. PlugInstall is dependent on it).
 call plug#begin('~/.vim/plugged')
 
-" Commented lines refer to plugins that I'm still not sure if I should remove
-" or not.
 Plug 'gruvbox-community/gruvbox'
-" Plug 'mbbill/undotree'
+Plug 'mbbill/undotree'
 
 " vim must have the popupwin feature for these to work properly.
 if has('nvim-0.4.0') || has('patch-8.2.191')
@@ -378,17 +376,17 @@ function! s:show_current_hunk() abort
     endif
 endfunction
 
+" --------------------------------- undotree ---------------------------------
+" Easily instantiate the undotree window.
+nnoremap <leader>u :UndotreeToggle<CR>
+" Set cursor/focus on the undotree window after being opened.
+let g:undotree_SetFocusWhenToggle = 1
+" Instantiate the undotree window with proper window size.
+let g:undotree_SplitWidth = 45
+
 " ----------------------------- Pending/Disabled -----------------------------
 " Easily remove highlighting on searched text.
 " map <ESC> :nohlsearch<CR>
-"
-" --------------------------------- undotree ---------------------------------
-" Easily instantiate the undotree window.
-" nnoremap <leader>u :UndotreeToggle<CR>
-" Set cursor/focus on the undotree window after being opened.
-" let g:undotree_SetFocusWhenToggle = 1
-" Instantiate the undotree window with proper window size.
-" let g:undotree_SplitWidth = 45
 
 " -------------------------------- OSC-52 Yank -------------------------------
 " This makes it so that we can put text yanked by vim that is runnning on a
