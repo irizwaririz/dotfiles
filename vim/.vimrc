@@ -99,6 +99,8 @@ set showcmd
 syntax on
 " Better command-line completion.
 set wildmenu
+" Pressing tab completes till longest common string and list all matches
+set wildmode=list:longest
 " Case insensitive command-line completion.
 set wildignorecase
 " Disable the default Vim startup message.
