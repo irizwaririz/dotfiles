@@ -388,10 +388,6 @@ let g:undotree_SetFocusWhenToggle = 1
 " Instantiate the undotree window with proper window size.
 let g:undotree_SplitWidth = 45
 
-" ----------------------------- Pending/Disabled -----------------------------
-" Easily remove highlighting on searched text.
-" map <ESC> :nohlsearch<CR>
-
 " -------------------------------- OSC-52 Yank -------------------------------
 " This makes it so that we can put text yanked by vim that is runnning on a
 " remote server into our local clipboard.

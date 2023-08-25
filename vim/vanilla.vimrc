@@ -299,14 +299,8 @@ augroup END
 " ----------------------------- Pending/Disabled -----------------------------
 " Easily add files in the buffer list.
 " nnoremap <leader>a :argadd <C-r>=fnameescape(expand('%:p:h'))<CR>/*<C-d>
-" Change how the wildmenu completion is done.
-" set wildmode=longest:full,full
 " Change how insert mode completion gives suggestions.
 " set completeopt=menuone,longest
-" The following needs to be implemented in vanilla vim. Still thinking of a
-" way to achieve it without plugins.
-" Open fzf ripgrep searching window easily.
-" nnoremap <C-g> :RG<CR>
 
 " -------------------------------- OSC-52 Yank -------------------------------
 " This makes it so that we can put text yanked by vim that is runnning on a
