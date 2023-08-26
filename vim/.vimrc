@@ -254,12 +254,14 @@ nnoremap Q <Nop>
 inoremap jk <ESC>
 inoremap kj <ESC>
 
-" ------------------------------- Finding Files ------------------------------
+" --------------------------- Finding/Loading Files --------------------------
 " Enable downward search, this makes it so that we can find files deep into
 " our directories.
 set path=.,**
 " Do not display these directories/files in the wildmenu.
 set wildignore=*.git/*,*.tags,tags,*venv/*
+" Easily add files in the buffer list.
+nnoremap <leader>a :argadd <C-r>=fnameescape(expand('%:p:h'))<CR>/*<C-d>
 
 " ----------------------------------- Ctags ----------------------------------
 " - Use <C-]> to jump to tag under cursor.
@@ -271,12 +273,12 @@ command! MakeTags !ctags -R --exclude=venv .
 " - Use <C-n> or <C-p> to autocomplete anything given by the 'complete'
 "   option.
 " - Use <C-x><C-f> to autocomplete filenames
-" Do not give insert completion messages
-set shortmess+=c
+" Show insert completion messages
+set shortmess-=c
 
 " ----------------------------------- netrw ---------------------------------- 
 " Instantiate the netrw explorer window easily.
-nnoremap <leader>pv :Lex<CR>
+nnoremap <leader>ft :Lex<CR>
 " Remove the netrw mapping of <C-l> to refresh. This is so that our map of
 " <C-l> to move to the right window split will still work on netrw.
 augroup netrw_mapping
