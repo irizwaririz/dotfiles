@@ -35,6 +35,7 @@ install dejavu-sans-mono-fonts.noarch
 
 # vim dependencies
 install ncurses-devel
+install libXt-devel
 
 # tmux dependencies
 install xclip
