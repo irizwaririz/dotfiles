@@ -88,6 +88,8 @@ set scrolloff=8
 set nowrap
 " Put vertical window splits to the right.
 set splitright
+" Put horizontal window splits below.
+set splitbelow
 " Show row and column number of cursor position.
 set ruler
 " Give more space for displaying messages
@@ -103,7 +105,7 @@ set shiftwidth=4
 " Convert TABs to spaces.
 set expandtab
 " Enable intelligent tabbing and spacing for indentation and alignment.
-set smarttab
+" set smarttab
 " When opening a new line and no file-specific indenting is enabled,
 " keep same indent as the line you're currently on.
 set autoindent
@@ -282,7 +284,7 @@ nnoremap <C-c> :cope<CR>
 
 " ------------------------- Dynamic Highlight Search -------------------------
 " These makes it so that vim disables search highlighting when you are 
-" "done searching" and re-enables it when you search again.
+" \"done searching\" and re-enables it when you search again.
 noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 
