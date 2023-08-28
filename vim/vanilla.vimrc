@@ -226,6 +226,14 @@ nnoremap <leader>b :b <C-d>
 nnoremap <leader>a :argadd <C-r>=fnameescape(expand('%:p:h'))<CR>/*<C-d>
 " Do not display these directories/files in the wildmenu.
 set wildignore=*.git/*,*.tags,tags,*venv/*
+" Automatically add the wildcard character after every character that is
+" usually used in filenames to make :find behave like a fuzzy finder.
+for i in split('abcdefghijklmnopqrstuvwxyz1234567890_-', '\zs')
+    execute printf("cnoremap <expr> %s getcmdline() =~ '^find .*$' ? '*%s' : '%s'", i ,i ,i)
+endfor
+for i in split('abcdefghijklmnopqrstuvwxyz1234567890_-', '\zs')
+    execute printf("cnoremap <expr> %s getcmdline() =~ '^vert sfind .*$' ? '*%s' : '%s'", i ,i ,i)
+endfor
 
 " ----------------------------------- Ctags ----------------------------------
 " - Use <C-]> to jump to tag under cursor.
