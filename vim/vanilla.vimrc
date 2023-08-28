@@ -22,13 +22,13 @@ set updatetime=100
 " NOTE: Using double trailing slashes (e.g. ~/.vim/swap//) tells vim to enable
 " a feature where it avoids name collisions (i.e. same file names but different
 " paths) by using the whole path of the files instead.
-let &directory = expand('~/.vim/swap//')
+let &directory = expand('~/.vim/cache/swap//')
 
 set backup
-let &backupdir = expand('~/.vim/backup//')
+let &backupdir = expand('~/.vim/cache/backup//')
 
 set undofile
-let &undodir = expand('~/.vim/undo//')
+let &undodir = expand('~/.vim/cache/undo//')
 " Create those directories (with full permissions for the owner and no
 " permissions for anyone else) if they don't exist.
 if !isdirectory(&undodir) | call mkdir(&undodir, "p", 0700) | endif
