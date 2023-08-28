@@ -224,7 +224,7 @@ set path=.,**
 " Easily search files.
 nnoremap <C-p> :find 
 " Search files and open in vertical split.
-nnoremap <C-p>v :vert sfind
+nnoremap <C-p>v :vert sfind 
 " Check list of open buffers and prompt to open a buffer.
 nnoremap <leader>b :b <C-d>
 " Easily add files in the buffer list.
@@ -234,11 +234,9 @@ set wildignore=*.git/*,*.tags,tags,*venv/*
 " Automatically add the wildcard character after every character that is
 " usually used in filenames to make :find behave like a fuzzy finder.
 for i in split('abcdefghijklmnopqrstuvwxyz1234567890_-', '\zs')
-    execute printf("cnoremap <expr> %s getcmdline() =~ '^find .*$' ? '*%s' : '%s'", i ,i ,i)
+    execute printf("cnoremap <expr> %s getcmdline() =~ 'find .*$' ? '*%s' : '%s'", i ,i ,i)
 endfor
-for i in split('abcdefghijklmnopqrstuvwxyz1234567890_-', '\zs')
-    execute printf("cnoremap <expr> %s getcmdline() =~ '^vert sfind .*$' ? '*%s' : '%s'", i ,i ,i)
-endfor
+
 
 " ----------------------------------- Ctags ----------------------------------
 " - Use <C-]> to jump to tag under cursor.
