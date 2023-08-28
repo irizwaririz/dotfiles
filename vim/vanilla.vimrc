@@ -44,6 +44,8 @@ set hidden
 filetype plugin on
 " Extend % matching.
 packadd! matchit
+" Don't wait for a key after Escape in insert mode.
+silent! set noesckeys
 
 " ------------------------------ User Interface ------------------------------
 " Enable truecolor support.
@@ -96,6 +98,7 @@ set ruler
 set cmdheight=2
 
 " --------------------------- Tabs and Indentation ---------------------------
+" NOTE: ftplugins will tweak this accordingly.
 " Number of visual spaces per TAB.
 set tabstop=4
 " Number of spaces in TAB when editing.
@@ -249,6 +252,8 @@ command! MakeTags !ctags -R --exclude=venv .
 " - Use <C-x><C-f> to autocomplete filenames
 " Show insert completion messages
 set shortmess-=c
+" Change how insert mode completion gives suggestions.
+set completeopt=menuone,preview,longest
 
 " ----------------------------------- netrw ---------------------------------- 
 " Instantiate the netrw explorer window easily.
