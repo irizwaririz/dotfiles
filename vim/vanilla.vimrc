@@ -143,7 +143,7 @@ set pastetoggle=<F2>
 " Set leader key to spacebar.
 let mapleader = " "
 " Resize windows easily.
-nnoremap <leader>= :vertical resize +10<CR>
+nnoremap <leader>+ :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
 " Easily do black hole register deletion (i.e. really delete not cut).
 nmap <leader>d "_d
@@ -213,9 +213,6 @@ vnoremap K :m '<-2<CR>gv=gv
 " ----------------------------------- Modes ----------------------------------
 " 'Q' in normal mode enters Ex mode. This is disabled for now.
 nnoremap Q <Nop>
-" This will make exiting insert mode to normal mode more efficient.
-inoremap jk <ESC>
-inoremap kj <ESC>
 
 " --------------------------- Finding/Loading Files --------------------------
 " Enable downward search, this makes it so that we can find files deep into
