@@ -1,3 +1,4 @@
+" TODO: Put plugin specific stuff in PLUGINS
 " ---------------------------------- System ----------------------------------
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
@@ -129,6 +130,8 @@ set shortmess-=S
 " ----------------------------- General Mappings -----------------------------
 " This will make Y behave like D/C.
 nnoremap Y y$
+
+" TODO: PUT IN AUTOLOAD
 " This will allow us to apply macros to visually selected lines (per line)
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
@@ -150,6 +153,7 @@ nmap <leader>d "_d
 " Easily copy relative filepath of current file to the clipboard
 nnoremap <leader>cp :let @+=@%<CR>
 
+" TODO: PUT IN AUTOLOAD
 " ----------------------------- Window Splits Zoom ---------------------------
 " Function that toggles zooming in and out of a specific window split.
 function! ToggleZoom(toggle)
@@ -282,6 +286,7 @@ nnoremap [Q :cfirst<CR>
 " Easily open quickfix list window
 nnoremap <C-c> :cope<CR>
 
+" Use this instead directly and put in plugin: https://github.com/romainl/vim-cool/blob/master/plugin/cool.vim
 " ------------------------- Dynamic Highlight Search -------------------------
 " These makes it so that vim disables search highlighting when you are 
 " \"done searching\" and re-enables it when you search again.
@@ -310,10 +315,7 @@ autocmd!
     autocmd InsertEnter * call StopHL()
 augroup END
 
-" ----------------------------- Pending/Disabled -----------------------------
-" Change how insert mode completion gives suggestions.
-" set completeopt=menuone,longest
-
+" Put in plugin directory
 " -------------------------------- OSC-52 Yank -------------------------------
 " This makes it so that we can put text yanked by vim that is runnning on a
 " remote server into our local clipboard.
@@ -543,3 +545,8 @@ nnoremap <silent> <expr> <Plug>OSCYank OSCYankOperator('')
 
 command! -range OSCYank <line1>,<line2>call OSCYankVisual()
 command! -nargs=1 OSCYankReg call OSCYankString(getreg(<f-args>))
+
+
+" ------------------------------- extended.vim -------------------------------
+" Extend functionality by installing and configuring third party plugins.
+runtime extended.vim
