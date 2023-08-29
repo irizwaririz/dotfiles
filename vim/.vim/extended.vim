@@ -1,7 +1,3 @@
-" --------------- Unset conflicting configuration from .vimrc ----------------
-" Unmap this: nnoremap <C-p>v :vert sfind 
-nunmap <C-p>v
-
 " ---------------------------------- Plugins ---------------------------------
 " Automatic installation of vim-plug if it's not yet installed.
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation

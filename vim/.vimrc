@@ -224,7 +224,7 @@ set path=.,**
 " Easily search files.
 nnoremap <C-p> :find 
 " Search files and open in vertical split.
-nnoremap <C-p>v :vert sfind 
+cnoremap <expr> <C-v> getcmdline() =~ '^find .*$' ? '<Home>vert s<End>' : '<C-v>'
 " Check list of open buffers and prompt to open a buffer.
 nnoremap <leader>b :b <C-d>
 " Easily add files in the buffer list.
