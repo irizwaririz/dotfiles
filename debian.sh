@@ -42,6 +42,11 @@ install xclip
 install htop
 install ncdu
 
+# multimedia
+install feh
+install sxiv
+install mpv
+
 # Run all installation scripts in programs/
 for f in programs/*.sh; do bash "$f" -H; done
 
