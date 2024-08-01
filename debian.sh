@@ -31,6 +31,9 @@ install tmux
 # st dependencies
 install libxft-dev
 
+# slock dependencies
+install libxrandr-dev
+
 # vim dependencies
 install libncurses5-dev
 install libxt-dev

@@ -33,6 +33,9 @@ install libX11-devel
 install libXft-devel
 install dejavu-sans-mono-fonts.noarch 
 
+# slock dependencies
+install libXrandr-devel
+
 # vim dependencies
 install ncurses-devel
 install libXt-devel
