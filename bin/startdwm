@@ -2,4 +2,5 @@
 feh --bg-fill ~/wallpapers/by_belltowers_2880.jpg
 slstatus &
 xbindkeys
+setxkbmap -option caps:ctrl_modifier
 dwm
