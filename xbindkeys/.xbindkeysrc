@@ -1,0 +1,10 @@
+"amixer set 'Master' 0%"
+  XF86AudioMute
+"amixer set 'Master' 5%-"
+  XF86AudioLowerVolume
+"amixer set 'Master' 5%+"
+  XF86AudioRaiseVolume
+"light -U 5"
+  XF86MonBrightnessDown
+"light -A 5"
+  XF86MonBrightnessUp
