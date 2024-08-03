@@ -1,0 +1,5 @@
+#!/bin/bash
+feh --bg-fill ~/wallpapers/by_belltowers_2880.jpg
+slstatus &
+xbindkeys
+dwm
