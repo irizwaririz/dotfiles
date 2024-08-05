@@ -1,31 +1,17 @@
 #!/bin/bash
 
-#Declare colors
-red='\033[0;31m'
-nc='\033[0m'
-yellow='\033[1;33m'
+chosen="$(echo -e "Connect\nDisconnect\nExit" | dmenu -i)"
 
-wifictl(){
-    case $1 in
-    connect)
-    wifi_pick="$(nmcli device wifi list | dmenu -l 10 -p "Select Wifi:")"
-    bssid=`echo $wifi_pick | cut -d ' ' -f2`
+case $chosen in
+    "Connect")
+        wifi_pick="$(nmcli device wifi list | dmenu -l 10 -p "Select Wifi:")"
+        bssid=`echo $wifi_pick | cut -d ' ' -f2`
 
-    pass=$(echo "" | dmenu -l 2 -p "Enter Password:")
+        pass=$(echo "" | dmenu -l 2 -p "Enter Password:")
 
-    [ -z "$bssid" ] && exit 0 || [ -n "$pass" ] && nmcli device wifi connect "$bssid" password "$pass" || nmcli device wifi connect "$bssid"
-    ;;
-
-    disconnect)
-    nmcli device disconnect wlp2s0
-    ;;
-
-    *)
-    printf ${red}"invalid argument: ${nc} $1 \n"
-    printf ${yellow}"valid arguments are:\n"
-    printf "connect\n"
-    printf "disconnect${nc}\n" && exit 1
-    ;;
+        [ -z "$bssid" ] && exit 0 || [ -n "$pass" ] && nmcli device wifi connect "$bssid" password "$pass" || nmcli device wifi connect "$bssid"
+        ;;
+    "Disconnect")
+        nmcli device disconnect wlp2s0
+        ;;
 esac
-}
-wifictl $1
