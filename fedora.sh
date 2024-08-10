@@ -47,10 +47,19 @@ install xclip
 install htop
 install ncdu
 
+## desktop programs
 # multimedia
 install feh
 install sxiv
 install mpv
+install pulsemixer
+install jmtpfs
+
+# notification
+install dunst
+
+# keybindings
+install xbindkeys
 
 # Run all installation scripts in programs/
 for f in programs/*.sh; do bash "$f" -H; done
