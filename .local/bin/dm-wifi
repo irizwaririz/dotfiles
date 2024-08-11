@@ -1,17 +1,56 @@
 #!/bin/bash
 
-chosen="$(echo -e "Connect\nDisconnect\nExit" | dmenu -i)"
+action="$(echo -e "Connect\nDisconnect\nForget\nExit" | dmenu -i)"
 
-case $chosen in
+case "$action" in
     "Connect")
-        wifi_pick="$(nmcli device wifi list | dmenu -l 10 -p "Select Wifi:")"
-        bssid=`echo $wifi_pick | cut -d ' ' -f2`
+        connect_type=`echo -e "New Connection\nKnown Connection" | dmenu -i`
 
-        pass=$(echo "" | dmenu -l 2 -p "Enter Password:")
+        case "$connect_type" in
+            "New Connection")
+                wifi_pick="$(nmcli device wifi list | dmenu -l 10 -p "Select Wifi:" | tr -s ' ')"
+                wifi_bssid=`echo "$wifi_pick" | cut -d ' ' -f2`
+                wifi_security=`echo "$wifi_pick" | cut -d ' ' -f10`
 
-        [ -z "$bssid" ] && exit 0 || [ -n "$pass" ] && nmcli device wifi connect "$bssid" password "$pass" || nmcli device wifi connect "$bssid"
+                is_enterprise=`echo "$wifi_security" | sed 's/^.*Enterprise$//g'` # empty string if enterprise
+
+                if [ -n "$wifi_security" ] && [ "$is_enterprise" == '' ]; then
+                    wifi_ssid=`echo "$wifi_pick" | cut -d ' ' -f3`
+
+                    user=$(echo "" | dmenu -l 2 -p "Enter Username:")
+                    pass=$(echo "" | dmenu -l 2 -p "Enter Password:")
+
+                    if [ -n "$user" ] && [ -n "$pass"]; then
+                        nmcli connection add type wifi ifname wlp2s0 con-name "$wifi_ssid" ssid "$wifi_ssid"
+                        nmcli connection modify id "$wifi_ssid" 802.1x.eap peap
+                        nmcli connection modify id "$wifi_ssid" 802.1x.phase2-auth mschapv2
+                        nmcli connection modify id "$wifi_ssid" 802.1x.identity "$user"
+                        nmcli connection modify id "$wifi_ssid" 802.1x.password "$pass"
+                        nmcli connection modify id "$wifi_ssid" wifi-sec.key-mgmt wpa-eap
+                    fi
+
+                    nmcli connection up id "$wifi_ssid"
+                else
+                    pass=$(echo "" | dmenu -l 2 -p "Enter Password:")
+
+                    [ -z "$wifi_bssid" ] && exit 0 || [ -n "$pass" ] && nmcli device wifi connect "$wifi_bssid" password "$pass" || nmcli device wifi connect "$wifi_bssid"
+                fi
+                ;;
+            "Known Connection")
+                conn_pick="$(nmcli connection show | grep 'NAME\|wifi' | dmenu -l 10 -p "Connect Wifi:")"
+                conn_bssid=`echo "$conn_pick" | cut -d ' ' -f1`
+
+                [ -z "$conn_bssid" ] && exit 0 || nmcli connection up id "$conn_bssid"
+                ;;
+        esac
         ;;
     "Disconnect")
         nmcli device disconnect wlp2s0
+        ;;
+    "Forget")
+        conn_pick="$(nmcli connection show | grep 'NAME\|wifi' | dmenu -l 10 -p "Forget Wifi:" | tr -s ' ')"
+        conn_uuid=`echo "$conn_pick" | cut -d ' ' -f2`
+
+        [ -z "$conn_uuid" ] && exit 0 || nmcli connection delete "$conn_uuid"
         ;;
 esac
