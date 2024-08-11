@@ -1,0 +1,1 @@
+Don't forget to append ~/.local/bin to the $PATH at /etc/profile!
