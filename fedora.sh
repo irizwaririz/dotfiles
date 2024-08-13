@@ -52,14 +52,18 @@ install ncdu
 install feh
 install sxiv
 install mpv
+install flameshot
+install alsa-utils
+install playerctl
 install pulsemixer
+install light
 install jmtpfs
-
 # notification
 install dunst
-
 # keybindings
 install xbindkeys
+# finances
+install gnucash
 
 # Run all installation scripts in programs/
 for f in programs/*.sh; do bash "$f" -H; done
