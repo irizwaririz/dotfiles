@@ -10,23 +10,18 @@ case "$action" in
             "New Connection")
                 wifi_pick="$(nmcli device wifi list | dmenu -l 10 -p "Select Wifi:" | tr -s ' ')"
                 wifi_bssid=`echo "$wifi_pick" | cut -d ' ' -f2`
-                wifi_security=`echo "$wifi_pick" | cut -d ' ' -f10`
+                wifi_security=`echo "$wifi_pick" | cut -d ' ' -f11`
 
-                is_enterprise=`echo "$wifi_security" | sed 's/^.*Enterprise$//g'` # empty string if enterprise
+                is_enterprise=`echo "$wifi_security" | sed 's/^802.1X$/enterprise/g'`
 
-                if [ -n "$wifi_security" ] && [ "$is_enterprise" == '' ]; then
+                if [ -n "$wifi_security" ] && [ "$is_enterprise" == 'enterprise' ]; then
                     wifi_ssid=`echo "$wifi_pick" | cut -d ' ' -f3`
 
                     user=$(echo "" | dmenu -l 2 -p "Enter Username:")
                     pass=$(echo "" | dmenu -l 2 -p "Enter Password:")
 
-                    if [ -n "$user" ] && [ -n "$pass"]; then
-                        nmcli connection add type wifi ifname wlp2s0 con-name "$wifi_ssid" ssid "$wifi_ssid"
-                        nmcli connection modify id "$wifi_ssid" 802.1x.eap peap
-                        nmcli connection modify id "$wifi_ssid" 802.1x.phase2-auth mschapv2
-                        nmcli connection modify id "$wifi_ssid" 802.1x.identity "$user"
-                        nmcli connection modify id "$wifi_ssid" 802.1x.password "$pass"
-                        nmcli connection modify id "$wifi_ssid" wifi-sec.key-mgmt wpa-eap
+                    if [ -n "$user" ] && [ -n "$pass" ]; then
+                        nmcli connection add type wifi ifname wlp2s0 con-name "$wifi_ssid" ssid "$wifi_ssid" 802-1x.eap peap 802-1x.phase2-auth mschapv2 802-1x.identity "$user" 802-1x.password "$pass" wifi-sec.key-mgmt wpa-eap
                     fi
 
                     nmcli connection up id "$wifi_ssid"
