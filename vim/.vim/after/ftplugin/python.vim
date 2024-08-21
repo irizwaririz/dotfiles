@@ -9,7 +9,7 @@ endif
 " Ensure flake8 is installed
 if executable('flake8')
     " Set makeprg
-    setlocal makeprg=flake8
+    setlocal makeprg=flake8\ --exclude\ venv
 endif
 
 " Number of visual spaces per TAB.
