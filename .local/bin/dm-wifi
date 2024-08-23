@@ -4,7 +4,7 @@ action="$(echo -e "Connect\nDisconnect\nForget\nExit" | dmenu -i)"
 
 case "$action" in
     "Connect")
-        connect_type=`echo -e "New Connection\nKnown Connection" | dmenu -i`
+        connect_type=`echo -e "New Connection\nKnown Connection\nHidden Connection" | dmenu -i`
 
         case "$connect_type" in
             "New Connection")
@@ -36,6 +36,13 @@ case "$action" in
                 conn_bssid=`echo "$conn_pick" | cut -d ' ' -f1`
 
                 [ -z "$conn_bssid" ] && exit 0 || nmcli connection up id "$conn_bssid"
+                ;;
+            "Hidden Connection")
+                wifi_ssid=$(echo "" | dmenu -l 2 -p "Enter SSID:")
+                pass=$(echo "" | dmenu -l 2 -p "Enter Password:")
+
+                nmcli connection add type wifi ifname wlp2s0 con-name "$wifi_ssid" ssid "$wifi_ssid" wifi-sec.key-mgmt wpa-psk wifi-sec.psk "$pass"
+                nmcli connection up id "$wifi_ssid"
                 ;;
         esac
         ;;
