@@ -51,7 +51,7 @@ silent! set noesckeys
 " Enable truecolor support.
 set termguicolors
 " Use gruvbox as our colorscheme (in dark mode).
-colorscheme gruvbox
+colorscheme solarized
 set background=dark
 " Show (partial) commands in status line.
 set showcmd
