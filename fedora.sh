@@ -58,6 +58,8 @@ install playerctl
 install pulsemixer
 install light
 install jmtpfs
+install zathura
+install zathura-pdf-mupdf
 # notification
 install dunst
 # keybindings
