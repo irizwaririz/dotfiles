@@ -58,7 +58,6 @@ install mpv
 install flameshot
 install alsa-utils
 install playerctl
-install pulsemixer
 install light
 install jmtpfs
 install zathura
