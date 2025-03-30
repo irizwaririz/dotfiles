@@ -1,5 +1,6 @@
-feh --bg-fill ~/wallpapers/by_belltowers_2880.jpg
+feh --bg-fill --randomize ~/pictures/wallpapers/*
 slstatus &
-# xbindkeys
+xbindkeys
 setxkbmap -option caps:ctrl_modifier
+dunst &
 dwm
