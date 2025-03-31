@@ -36,6 +36,9 @@ install dejavu-sans-mono-fonts.noarch
 # slock dependencies
 install libXrandr-devel
 
+# dmenu dependencies
+install libXinerama-devel
+
 # vim dependencies
 install ncurses-devel
 install libXt-devel
@@ -55,7 +58,6 @@ install mpv
 install flameshot
 install alsa-utils
 install playerctl
-install pulsemixer
 install light
 install jmtpfs
 install zathura
