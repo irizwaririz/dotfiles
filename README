@@ -1,0 +1,19 @@
+## Removing login manager (Fedora LXDE spin)
+
+1. Edit grub config (`/etc/default/grub`)
+
+```
+GRUB_CMDLINE_LINUX="text"
+```
+
+2. Then apply changes
+
+```
+$ grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+
+3. Then disable login manager service
+
+```
+$ sudo systemctl disable lxdm.service
+```

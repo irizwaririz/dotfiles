@@ -1,4 +1,4 @@
-feh --bg-fill --randomize ~/pictures/wallpapers/*
+feh --no-fehbg --bg-fill --randomize ~/pictures/wallpapers/*
 slstatus &
 xbindkeys
 setxkbmap -option caps:ctrl_modifier

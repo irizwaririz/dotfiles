@@ -61,7 +61,7 @@ export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL
 
 for i in /etc/profile.d/*.sh /etc/profile.d/sh.local ; do
     if [ -r "$i" ]; then
-        if [ "${-#*i}" != "$-" ]; then 
+        if [ "${-#*i}" != "$-" ]; then
             . "$i"
         else
             . "$i" >/dev/null
@@ -83,4 +83,3 @@ then
    # Check for double sourcing is done in /etc/bashrc.
    . /etc/bashrc
 fi
-
